@@ -3,23 +3,23 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-/* 시간 흐름 관리*/
+/* 时间流逝管理 */
 
 public class TimeManager : MonoBehaviour
 {
-    public event Action OnDayEnd;
-    public TextMeshProUGUI dayText;
-    public TextMeshProUGUI timeText;
-    public bool isDayEnding = false;
-    public int gameHour = 9;
-    public int gameMinute = 0;
-    public int currentDayIndex = 0;
-    public int day = 1;
+    public event Action OnDayEnd; // 每天结束时触发的事件
+    public TextMeshProUGUI dayText; // 显示日期的 UI 元素
+    public TextMeshProUGUI timeText; // 显示时间的 UI 元素
+    public bool isDayEnding = false; // 标记是否正在结束一天
+    public int gameHour = 9; // 当前游戏小时
+    public int gameMinute = 0; // 当前游戏分钟
+    public int currentDayIndex = 0; // 当前星期几的索引
+    public int day = 1; // 当前天数
 
-    private string[] daysOfWeek = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
-    private float timePerGameMinute = 10f;
-    private float currentTime = 0f;
-    private ItemSellingBox itemBox;
+    private string[] daysOfWeek = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" }; // 星期数组
+    private float timePerGameMinute = 10f; // 每分钟的时间流逝速度
+    private float currentTime = 0f; // 当前累计时间
+    private ItemSellingBox itemBox; // 物品出售箱引用
 
     private void Start()
     {
