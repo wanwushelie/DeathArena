@@ -34,7 +34,8 @@ public class PlantGrowthManager : MonoBehaviour
     {
         if (GameManager.instance.tileManager.DoesTileExist(position) && GameManager.instance.tileManager.GetTileName(position) == "PlowedTile")
         {
-            SoundManager.Instance.Play("EFFECT/Seeded", SoundType.EFFECT);
+            // SoundManager.Instance.Play("EFFECT/Seeded", SoundType.EFFECT);
+            SoundManager.Instance.Play("播种音效");
 
             // 타일 상태 변경, Seeded 타일로 설정
             GameManager.instance.tileManager.SetTileState(position, "Seeded");

@@ -114,7 +114,8 @@ public class ItemSellingBox : MonoBehaviour
     // 加号按钮点击事件处理方法
     private void OnPlusButtonClick()
     {
-        SoundManager.Instance.Play("EFFECT/Click", SoundType.EFFECT); // 播放点击音效
+        // SoundManager.Instance.Play("EFFECT/Click", SoundType.EFFECT); // 播放点击音效
+        SoundManager.Instance.Play("控制物品售卖时的音效");
         // 如果选中的物品槽存在，物品数量大于0且当前售卖数量小于物品槽内物品数量
         if (selectedSlot != null && selectedSlot.currentCount > 0 && itemCount < selectedSlot.currentCount)
         {
@@ -130,7 +131,8 @@ public class ItemSellingBox : MonoBehaviour
     // 减号按钮点击事件处理方法
     private void OnMinusButtonClick()
     {
-        SoundManager.Instance.Play("EFFECT/Click", SoundType.EFFECT); // 播放点击音效
+        // SoundManager.Instance.Play("EFFECT/Click", SoundType.EFFECT); // 播放点击音效
+        SoundManager.Instance.Play("控制物品售卖时的音效");
         // 如果选中的物品槽存在，物品数量大于0且当前售卖数量大于0
         if (selectedSlot != null && selectedSlot.currentCount > 0 && itemCount > 0)
         {
@@ -146,7 +148,8 @@ public class ItemSellingBox : MonoBehaviour
     // 确认按钮点击事件处理方法
     private void OnCheckButtonClick()
     {
-        SoundManager.Instance.Play("EFFECT/Click", SoundType.EFFECT); // 播放点击音效
+        // SoundManager.Instance.Play("EFFECT/Click", SoundType.EFFECT); // 播放点击音效
+        SoundManager.Instance.Play("控制物品售卖时的音效");
         // 如果选中的物品槽存在，物品槽内物品数量大于等于0且当前售卖数量大于0
         if (selectedSlot != null && selectedSlot.currentCount >= 0 && itemCount > 0)
         {

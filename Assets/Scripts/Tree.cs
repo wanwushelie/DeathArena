@@ -110,7 +110,8 @@ public class Tree : MonoBehaviour
             rb2.AddForce(new Vector2(randomX, randomY), ForceMode2D.Impulse);
         }
 
-        SoundManager.Instance.Play("EFFECT/FallTree", SoundType.EFFECT);
+        //SoundManager.Instance.Play("EFFECT/FallTree", SoundType.EFFECT);
+        SoundManager.Instance.Play("树木倒下的音效");
         anim.SetTrigger("isFalling");
 
         Destroy(gameObject, 1f);  // 나무 오브젝트 파괴

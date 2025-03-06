@@ -11,55 +11,30 @@ public enum SoundType
 
 public class SoundManager
 {
-    public static SoundManager Instance { get; private set; } // 외부에서 접근 가능, 변경 불가능
+    public static SoundManager Instance { get; private set; }
 
     public AudioSource[] audioSources = new AudioSource[(int)SoundType.MAXCOUNT];
-    private Dictionary<string, AudioClip> audioClips = new Dictionary<string, AudioClip>(); // 사운드 파일을 저장할 딕셔너리 <경로, 해당 오디오 클립> -> Object Pooling
+    private Dictionary<string, AudioClip> audioClips = new Dictionary<string, AudioClip>();
+    private AudioData audioData;
 
-    //private 생성자 : 외부에서 생성 불가능
     private SoundManager() { }
 
-    // 정적 생성자 : 클래스 로드 시 호출되며, 단 한 번 실행
     static SoundManager()
     {
         Instance = new SoundManager();
     }
 
-    private AudioClip GetOrAddAudioClip(string path, SoundType type = SoundType.EFFECT)
+    public void Init(AudioData data = null)
     {
-        if (path.Contains("Sounds/") == false)
-            path = $"Sounds/{path}"; // Sounds 폴더 안에 저장될 수 있도록
-
-        AudioClip audioClip = null;
-
-        if (type == SoundType.BGM) // BGM 배경음악 클립 붙이기
-        {
-            audioClip = Resources.Load<AudioClip>(path);
-        }
-        else // Effect 효과음 클립 붙이기
-        {
-            if (audioClips.TryGetValue(path, out audioClip) == false)
-            {
-                audioClip = Resources.Load<AudioClip>(path);
-                audioClips.Add(path, audioClip);
-            }
-        }
-
-        if (audioClip == null)
-            Debug.LogFormat("[SoundManager] 오디오 클립이 없습니다: {0}", path);
-
-        return audioClip;
-    }
-
-    public void Init()
-    {
+        audioData = data;
+        
         GameObject root = GameObject.Find("@Sound");
         if (root == null)
         {
             root = new GameObject { name = "@Sound" };
             Object.DontDestroyOnLoad(root);
 
-            string[] soundNames = System.Enum.GetNames(typeof(SoundType)); // "BGM", "EFFECT"
+            string[] soundNames = System.Enum.GetNames(typeof(SoundType));
             for (int i = 0; i < soundNames.Length - 1; i++)
             {
                 GameObject go = new GameObject { name = soundNames[i] };
@@ -67,21 +42,35 @@ public class SoundManager
                 go.transform.parent = root.transform;
             }
 
-            audioSources[(int)SoundType.BGM].loop = true;       // bgm 재생기는 무한 반복 재생
+            audioSources[(int)SoundType.BGM].loop = true;
             audioSources[(int)SoundType.BGM].volume = 1f;
             audioSources[(int)SoundType.EFFECT].volume = 1f;
         }
     }
 
+    public void Play(string key)
+    {
+        if (audioData != null)
+        {
+            var entry = System.Array.Find(audioData.entries, e => e.key == key);
+            if (entry != null)
+            {
+                Play(entry.selectedClip, entry.type, entry.pitch, entry.volume);
+                return;
+            }
+        }
+        Debug.LogWarning($"[SoundManager] AudioData not found or key '{key}' not exist");
+    }
+
+    // ... 保留原有 GetOrAddAudioClip 方法 ...
+
     public void Clear()
     {
-        // 재생기 전부 재생 스탑, 음반 빼기
         foreach (AudioSource audioSource in audioSources)
         {
             audioSource.clip = null;
             audioSource.Stop();
         }
-        // 효과음 Dictionary 비우기
         audioClips.Clear();
     }
 
@@ -90,7 +79,7 @@ public class SoundManager
         if (audioClip == null)
             return;
 
-        if (type == SoundType.BGM) // BGM 배경음악 재생
+        if (type == SoundType.BGM)
         {
             AudioSource audioSource = audioSources[(int)type];
             if (audioSource.isPlaying)
@@ -101,7 +90,7 @@ public class SoundManager
             audioSource.volume = volume;
             audioSource.Play();
         }
-        else // Effect 효과음 재생
+        else
         {
             AudioSource audioSource = audioSources[(int)type];
             audioSource.pitch = pitch;
@@ -114,6 +103,28 @@ public class SoundManager
         AudioClip audioClip = GetOrAddAudioClip(path, type);
         Play(audioClip, type, pitch, volume);
     }
+
+    private AudioClip GetOrAddAudioClip(string path, SoundType type = SoundType.EFFECT)
+    {
+        if (path.Contains("Sounds/") == false)
+            path = $"Sounds/{path}";
+
+        AudioClip audioClip = null;
+        if (audioClips.TryGetValue(path, out audioClip) == false)
+        {
+            audioClip = Resources.Load<AudioClip>(path);
+            if (audioClip != null)
+            {
+                audioClips.Add(path, audioClip);
+            }
+            else
+            {
+                Debug.LogError($"[SoundManager] AudioClip not found at path: {path}");
+            }
+        }
+        return audioClip;
+    }
+
 
     public void Stop(AudioClip audioClip, SoundType type = SoundType.EFFECT)
     {

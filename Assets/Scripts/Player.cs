@@ -137,7 +137,8 @@ public class Player : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    SoundManager.Instance.Play("EFFECT/Pick", SoundType.EFFECT);
+                    // SoundManager.Instance.Play("EFFECT/Pick", SoundType.EFFECT);
+                    SoundManager.Instance.Play("拾取音效");
                     InGameUI.instance.ShowPostPanel();
                 }
             }
@@ -154,7 +155,8 @@ public class Player : MonoBehaviour
             {
                 if (inventoryManager.toolbar.selectedSlot.itemName == "Axe")
                 {
-                    SoundManager.Instance.Play("EFFECT/HITTREE", SoundType.EFFECT);
+                    //SoundManager.Instance.Play("EFFECT/HITTREE", SoundType.EFFECT);
+                    SoundManager.Instance.Play("砍树音效");
                     isAxing = true;
                     anim.SetTrigger("isAxing");
                     tree.hitCount++;
@@ -277,14 +279,17 @@ public class Player : MonoBehaviour
 
     private void Hoeing()
     {
-        SoundManager.Instance.Play("EFFECT/Plow", SoundType.EFFECT);
+        // SoundManager.Instance.Play("EFFECT/Plow", SoundType.EFFECT);
+        SoundManager.Instance.Play("锄地音效");
         tileManager.SetInteracted(targetPosition);
         StartCoroutine(WaitForAnimation());
     }
 
     private void Watering()
     {
-        SoundManager.Instance.Play("EFFECT/Watering", SoundType.EFFECT, 1, 1);
+        // SoundManager.Instance.Play("EFFECT/Watering", SoundType.EFFECT, 1, 1);
+        SoundManager.Instance.Play("浇水音效");
+
         tileManager.WaterTile(targetPosition);
         StartCoroutine(WaitForAnimation());
     }

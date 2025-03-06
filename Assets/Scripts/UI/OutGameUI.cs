@@ -14,7 +14,7 @@ public class OutGameUI : MonoBehaviour
     public Button noBtn;
     public bool isNewGame;
 
-
+    [SerializeField] private AudioData audioData;
     void Awake()
     {
         if (!instance)
@@ -27,11 +27,13 @@ public class OutGameUI : MonoBehaviour
             Destroy(gameObject);
         }
         SoundManager.Instance.Init();
+        SoundManager.Instance.Init(audioData);
     }
 
     void Start()
     {
-        SoundManager.Instance.Play("BGM/OutGame", SoundType.BGM);
+        //SoundManager.Instance.Play("BGM/OutGame", SoundType.BGM);
+        SoundManager.Instance.Play("背景音乐");
 
         GameObject inventoryObj = new GameObject("InventorySave");
         SaveData inventorySave = inventoryObj.AddComponent<SaveData>();
@@ -43,7 +45,8 @@ public class OutGameUI : MonoBehaviour
             newGameBtn.onClick.AddListener(() =>
             {
                 newGameBtn.interactable = false;
-                SoundManager.Instance.Play("EFFECT/Click2", SoundType.EFFECT);
+                //SoundManager.Instance.Play("EFFECT/Click2", SoundType.EFFECT);
+                SoundManager.Instance.Play("主菜单界面的按钮点击音效");
                 StartCoroutine(StartGameWithFadeOut());
             });
         }
@@ -54,14 +57,15 @@ public class OutGameUI : MonoBehaviour
             continueGameBtn.onClick.AddListener(() =>
             {
                 continueGameBtn.interactable = false;
-                SoundManager.Instance.Play("EFFECT/Click2", SoundType.EFFECT);
+                //SoundManager.Instance.Play("EFFECT/Click2", SoundType.EFFECT);
+                SoundManager.Instance.Play("主菜单界面的按钮点击音效");
                 StartCoroutine(StartGameWithFadeOut());
             });
 
             newGameBtn.onClick.AddListener(() =>
             {
-                SoundManager.Instance.Play("EFFECT/Click2", SoundType.EFFECT);
-
+                //SoundManager.Instance.Play("EFFECT/Click2", SoundType.EFFECT);
+                SoundManager.Instance.Play("主菜单界面的按钮点击音效");
                 // 기존 리스너 제거 (중복 등록 방지)
                 yesBtn.onClick.RemoveAllListeners();
                 noBtn.onClick.RemoveAllListeners();
@@ -70,14 +74,16 @@ public class OutGameUI : MonoBehaviour
 
                 yesBtn.onClick.AddListener(() =>
                 {
-                    SoundManager.Instance.Play("EFFECT/Click2", SoundType.EFFECT);
+                    //SoundManager.Instance.Play("EFFECT/Click2", SoundType.EFFECT);
+                    SoundManager.Instance.Play("主菜单界面的按钮点击音效");
                     panel.SetActive(false);
                     isNewGame = true;
                     StartCoroutine(StartGameWithFadeOut());
                 });
                 noBtn.onClick.AddListener(() =>
                 {
-                    SoundManager.Instance.Play("EFFECT/Click2", SoundType.EFFECT);
+                    // SoundManager.Instance.Play("EFFECT/Click2", SoundType.EFFECT);
+                    SoundManager.Instance.Play("主菜单界面的按钮点击音效");
                     panel.SetActive(false);
                 });
             });
@@ -85,7 +91,8 @@ public class OutGameUI : MonoBehaviour
 
         exitGameBtn.onClick.AddListener(() =>
         {
-            SoundManager.Instance.Play("EFFECT/Click2", SoundType.EFFECT);
+            // SoundManager.Instance.Play("EFFECT/Click2", SoundType.EFFECT);
+            SoundManager.Instance.Play("主菜单界面的按钮点击音效");
             SoundManager.Instance.StopAll();
             Application.Quit();
         });
@@ -95,6 +102,7 @@ public class OutGameUI : MonoBehaviour
     private IEnumerator StartGameWithFadeOut()
     {
         SoundManager.Instance.FadeOut(3.0f, "BGM/OutGame");
+        //SoundManager.Instance.FadeOut(3.0f, "背景音乐");
 
         FadeEffect.instance.FadeAndLoadScene("InGameScene");
 
