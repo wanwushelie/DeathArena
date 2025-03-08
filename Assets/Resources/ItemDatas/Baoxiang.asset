@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff688d6b06fa21f4f9ee4c8aea0d6c27, type: 3}
   m_Name: Baoxiang
   m_EditorClassIdentifier: 
-  itemName: Item Name
+  itemName: Baoxiang
   icon: {fileID: 1353218544, guid: 6ea47b9e3e8392540bfe2bc4c178337e, type: 3}
-  price: 0
-  maxAllowed: 99
-  isSellable: 0
+  price: 100
+  maxAllowed: 1
+  isSellable: 1

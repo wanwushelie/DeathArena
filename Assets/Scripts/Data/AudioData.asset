@@ -17,7 +17,7 @@ MonoBehaviour:
     type: 1
     candidateClips:
     - {fileID: 0}
-    selectedClip: {fileID: 8300000, guid: 2f70ff5928f4fa14db06a8374a8ab38f, type: 3}
+    selectedClip: {fileID: 8300000, guid: 2a94a17407f8c344783f89f5f61b577c, type: 3}
     volume: 1
     pitch: 1
   - key: "\u6811\u6728\u5012\u4E0B\u7684\u97F3\u6548"
