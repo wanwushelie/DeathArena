@@ -78,13 +78,13 @@ public class Player : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
-        // 대각선 이동 시 속도 일정하게 유지
+        // 对角线移动时保持速度一致
         if (movement.magnitude > 1)
         {
             movement = movement.normalized;
         }
 
-        // 마지막 이동 방향 저장
+        // 保存最后移动方向
         if (movement != Vector2.zero)
         {
             lastMoveDirection = movement;
@@ -93,12 +93,12 @@ public class Player : MonoBehaviour
 
     private void UpdateAnimation()
     {
-        // walk
+        // 行走动画
         anim.SetFloat("Horizontal", movement.x);
         anim.SetFloat("Vertical", movement.y);
         anim.SetFloat("Speed", movement.sqrMagnitude);
 
-        // idle
+        // 闲置动画
         if (movement.sqrMagnitude == 0)
         {
             anim.SetFloat("LastHorizontal", lastMoveDirection.x);
@@ -174,7 +174,7 @@ public class Player : MonoBehaviour
 
         targetPosition = new Vector3Int(Mathf.FloorToInt(worldMousePosition.x), Mathf.FloorToInt(worldMousePosition.y), 0);
 
-        // 플레이어의 월드 좌표를 그리드 좌표로 변환
+        // 将玩家的世界坐标转换为网格坐标
         Vector3 playerPosition = transform.position;
         Vector3Int gridPlayerPosition = new Vector3Int(Mathf.FloorToInt(playerPosition.x), Mathf.FloorToInt(playerPosition.y), 0);
 
@@ -199,61 +199,86 @@ public class Player : MonoBehaviour
         }
 
     }
+    /// <summary>
+    /// 处理植物交互逻辑，包括锄头开垦、播种、浇水和收获等操作。
+    /// </summary>
     public void PlantInteracted()
     {
-        if (isHoeing || isWatering) return;
-        if (tileManager == null) return;
-        if (inventoryManager == null || inventoryManager.toolbar == null || inventoryManager.toolbar.selectedSlot == null) return;
-        if (inventoryManager.toolbar.selectedSlot.itemName == null) return;
+        // 如果正在锄地或浇水，不进行后续操作
+        if (isHoeing || isWatering) return; 
+        // 如果TileManager未初始化，不进行后续操作
+        if (tileManager == null) return; 
+        // 如果InventoryManager、Toolbar或选中的插槽未初始化，不进行后续操作
+        if (inventoryManager == null || inventoryManager.toolbar == null || inventoryManager.toolbar.selectedSlot == null) return; 
+        // 如果选中的插槽物品名称为空，不进行后续操作
+        if (inventoryManager.toolbar.selectedSlot.itemName == null) return; 
 
-        CheckValidTiles();
+        // 检查鼠标点击的位置是否为有效瓷砖
+        CheckValidTiles(); 
 
+        // 如果是有效瓷砖且玩家没有移动
         if (isValidTile && !isMoving)
         {
-            MouseSelect mouseSelect = GetComponentInChildren<MouseSelect>();
+            // 获取子对象中的MouseSelect组件
+            MouseSelect mouseSelect = GetComponentInChildren<MouseSelect>(); 
             if (mouseSelect != null)
             {
-                mouseSelect.SetTargetPosition(targetPosition);
+                // 设置鼠标选择的目标位置
+                mouseSelect.SetTargetPosition(targetPosition); 
             }
 
+            // 当鼠标左键按下时
             if (Input.GetMouseButtonDown(0))
             {
-                // targePosition의 방향대로 애니메이션 방향 설정
-                SetAnimationDirection(targetPosition);
+                // 根据目标位置设置动画方向
+                SetAnimationDirection(targetPosition); 
 
-                string tileName = tileManager.GetTileName(targetPosition);
-                string tileState = tileManager.GetTileState(targetPosition);
+                // 获取目标位置的瓷砖名称
+                string tileName = tileManager.GetTileName(targetPosition); 
+                // 获取目标位置的瓷砖状态
+                string tileState = tileManager.GetTileState(targetPosition); 
 
+                // 如果瓷砖名称不为空
                 if (tileName != null)
                 {
+                    // 如果选中的物品是锄头
                     if (inventoryManager.toolbar.selectedSlot.itemName == "Hoe")
                     {
-                        // 새로운 땅 파기
+                        // 开垦新土地
                         if (tileName == "InteractableTile")
                         {
-                            isHoeing = true;
-                            anim.SetTrigger("isHoeing");
+                            // 设置锄地状态为真
+                            isHoeing = true; 
+                            // 触发锄地动画
+                            anim.SetTrigger("isHoeing"); 
                         }
 
-                        // 식물이 다 자란 경우
+                        // 植物成熟的情况
                         if (tileState == "Grown")
                         {
-                            tileManager.RemoveTile(targetPosition);
-                            GameManager.instance.plantGrowthManager.HarvestPlant(targetPosition);
+                            // 移除目标位置的瓷砖
+                            tileManager.RemoveTile(targetPosition); 
+                            // 收获目标位置的植物
+                            GameManager.instance.plantGrowthManager.HarvestPlant(targetPosition); 
                         }
                     }
 
-                    // 땅을 판 후
+                    // 开垦土地后
                     if (tileName == "PlowedTile")
                     {
-                        if (inventoryManager.toolbar.selectedSlot.itemName == "RiceSeed" || inventoryManager.toolbar.selectedSlot.itemName == "TomatoSeed")
+                        // 如果选中的物品是水稻种子或番茄种子
+                        if (inventoryManager.toolbar.selectedSlot.itemName == "RiceSeed" || inventoryManager.toolbar.selectedSlot.itemName == "TomatoSeed" || inventoryManager.toolbar.selectedSlot.itemName == "PlantSeed")
                         {
-                            Sowing();
+                            // 进行播种操作
+                            Sowing(); 
                         }
+                        // 如果选中的物品是浇水工具
                         else if (inventoryManager.toolbar.selectedSlot.itemName == "Watering")
                         {
-                            isWatering = true;
-                            anim.SetTrigger("isWatering");
+                            // 设置浇水状态为真
+                            isWatering = true; 
+                            // 触发浇水动画
+                            anim.SetTrigger("isWatering"); 
                         }
                     }
                 }
@@ -266,14 +291,14 @@ public class Player : MonoBehaviour
         Vector3 playerPosition = transform.position;
         Vector3Int gridPlayerPosition = new Vector3Int(Mathf.FloorToInt(playerPosition.x), Mathf.FloorToInt(playerPosition.y), 0);
 
-        // 현재 위치와 targetPosition을 비교하여 방향 계산
+        // 比较当前位置和目标位置来计算方向
         Vector3 direction = (targetPosition - gridPlayerPosition).normalized;
 
-        // 방향을 x, y 값으로 애니메이션 파라미터에 설정
+        // 将方向的x、y值设置为动画参数
         anim.SetFloat("Horizontal", direction.x);
         anim.SetFloat("Vertical", direction.y);
 
-        // 이전 이동 방향을 저장
+        // 保存上一次移动方向
         lastMoveDirection = direction;
     }
 
@@ -297,10 +322,10 @@ public class Player : MonoBehaviour
     private void Sowing()
     {
         PlantData plantData = inventoryManager.toolbar.selectedSlot.plantData;
-        inventoryManager.toolbar.selectedSlot.RemoveItem();  // 씨앗 갯수 줄이기
-        GameManager.instance.plantGrowthManager.PlantSeed(targetPosition, plantData);  // 씨앗 심기
+        inventoryManager.toolbar.selectedSlot.RemoveItem();  // 减少种子数量
+        GameManager.instance.plantGrowthManager.PlantSeed(targetPosition, plantData);  // 播种
 
-        // 씨앗이 다 떨어졌으면 슬롯 비우기
+        // 如果种子用完，清空插槽
         if (inventoryManager.toolbar.selectedSlot.isEmpty)
         {
             inventoryManager.toolbar.selectedSlot = null;
@@ -348,10 +373,10 @@ public class Player : MonoBehaviour
 
         Vector3 spawnOffset = Random.insideUnitCircle * 1.25f;
 
-        // 1. 드랍된 아이템 오브젝트 생성
+        // 1. 创建掉落的物品对象
         Item droppedItem = Instantiate(item, spawnLocation + spawnOffset, Quaternion.identity);
 
-        // 2. 드랍된 아이템의 개수 설정
+        // 2. 设置掉落物品的数量
         droppedItem.SetDroppedItemCount(itemCount);
 
         droppedItem.rigid.AddForce(spawnOffset * 0.3f, ForceMode2D.Impulse);
@@ -363,7 +388,7 @@ public class Player : MonoBehaviour
         lastMoveDirection = new Vector2(0, -1);
 
         anim.enabled = true;
-        // 애니메이션의 idle 방향 업데이트
+        // 更新动画的闲置方向
         anim.SetFloat("LastHorizontal", lastMoveDirection.x);
         anim.SetFloat("LastVertical", lastMoveDirection.y);
     }

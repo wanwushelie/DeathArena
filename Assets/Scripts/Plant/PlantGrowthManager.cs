@@ -5,10 +5,10 @@ using UnityEngine.Tilemaps;
 
 public class PlantGrowthManager : MonoBehaviour
 {
-    private Dictionary<Vector3Int, PlantData> plantDataDict = new Dictionary<Vector3Int, PlantData>(); // 타일 위치별로 심어진 식물의 데이터 저장
-    private Dictionary<Vector3Int, int> plantGrowthDays = new Dictionary<Vector3Int, int>(); // 씨앗 심은 날 저장
-    private Dictionary<Vector3Int, int> currentGrowthStages = new Dictionary<Vector3Int, int>(); // 현재 성장 단계 저장
-    private List<PlantSaveData> plantSaveDataList = new List<PlantSaveData>(); // 저장&로드에 사용할 식물 데이터 리스트
+    private Dictionary<Vector3Int, PlantData> plantDataDict = new Dictionary<Vector3Int, PlantData>(); // 按瓷砖位置存储种植植物的数据
+    private Dictionary<Vector3Int, int> plantGrowthDays = new Dictionary<Vector3Int, int>(); // 存储播种日期
+    private Dictionary<Vector3Int, int> currentGrowthStages = new Dictionary<Vector3Int, int>(); // 存储当前生长阶段
+    private List<PlantSaveData> plantSaveDataList = new List<PlantSaveData>(); // 用于保存和加载的植物数据列表
     private TimeManager timeManager;
 
 
@@ -29,28 +29,39 @@ public class PlantGrowthManager : MonoBehaviour
         }
     }
 
-    // 씨앗 심기
+    /// <summary>
+    /// 播种，在指定位置播种指定植物的种子。
+    /// </summary>
+    /// <param name="position">播种的瓷砖位置。</param>
+    /// <param name="plantData">要播种的植物数据。</param>
     public void PlantSeed(Vector3Int position, PlantData plantData)
     {
+        // 检查该位置是否存在瓷砖且瓷砖名称为 "PlowedTile"
         if (GameManager.instance.tileManager.DoesTileExist(position) && GameManager.instance.tileManager.GetTileName(position) == "PlowedTile")
         {
+            // 播放播种音效
             // SoundManager.Instance.Play("EFFECT/Seeded", SoundType.EFFECT);
             SoundManager.Instance.Play("播种音效");
 
-            // 타일 상태 변경, Seeded 타일로 설정
+            // 更改瓷砖状态，设置为已播种瓷砖
             GameManager.instance.tileManager.SetTileState(position, "Seeded");
             GameManager.instance.tileManager.seedMap.SetTile(position, GameManager.instance.tileManager.plantedTile);
 
+            // 将植物数据存储到字典中
             plantDataDict[position] = plantData;
+            // 输出当前播种的植物名称
             Debug.Log(plantDataDict[position].plantName);
+            // 初始化该位置植物的生长天数为 0
             plantGrowthDays[position] = 0;
+            // 初始化该位置植物的当前生长阶段为 0
             currentGrowthStages[position] = 0;
         }
     }
 
-    // 식물 성장
+    // 植物生长
     private IEnumerator GrowPlant(Vector3Int position)
     {
+        // 检查瓷砖是否存在且植物未成熟
         if (!GameManager.instance.tileManager.DoesTileExist(position) || GameManager.instance.tileManager.GetTileState(position) == "Grown")
         {
             yield break;
@@ -60,19 +71,19 @@ public class PlantGrowthManager : MonoBehaviour
         int currentStage = currentGrowthStages[position];
         int currentGrowthDay = plantGrowthDays[position];
 
-        // 각 성장 단계가 유효한 지 확인
+        // 检查每个生长阶段是否有效
         if (currentStage >= 0 && currentStage < plantData.growthStagesTiles.Length)
         {
             currentStage++;
             currentGrowthDay++;
 
-            // 다음 성장 단계 타일로 변경
+            // 更改为下一生长阶段的瓷砖
             GameManager.instance.tileManager.seedMap.SetTile(position, plantData.growthStagesTiles[currentStage - 1]);
-            plantData.growthStagesTiles[currentStage - 1].colliderType = Tile.ColliderType.Sprite;
+            plantData.growthStagesTiles[currentStage - 1].colliderType = Tile.ColliderType.Sprite;//瓷砖的碰撞体将基于瓷砖的精灵形状生成
 
             currentGrowthStages[position] = currentStage;
 
-            // 모든 성장 단계를 완료했으면 "Grown" 상태로 변경
+            // 如果完成所有生长阶段，则更改为“已成熟”状态
             if (currentGrowthStages[position] >= plantData.growthStagesTiles.Length)
             {
                 GameManager.instance.tileManager.SetTileState(position, "Grown");
@@ -88,14 +99,14 @@ public class PlantGrowthManager : MonoBehaviour
         yield return null;
     }
 
-    // 식물 수확
+    // 收获植物
     public void HarvestPlant(Vector3Int position)
     {
         PlantData plantData = GetPlantData(position);
 
         if (plantData != null)
         {
-            // GetCellCenterWorld() : 해당 타일 위치의 중심에 해당하는 월드 좌표를 반환
+            // GetCellCenterWorld() : 返回该瓷砖位置中心对应的世界坐标
             Vector3 spawnPosition = GameManager.instance.tileManager.interactableMap.GetCellCenterWorld(position);
             GameObject plant = Instantiate(plantData.plantPrefab, spawnPosition, Quaternion.identity);
 
@@ -105,7 +116,7 @@ public class PlantGrowthManager : MonoBehaviour
                 StartCoroutine(FloatAndLand(plant));
             }
         }
-        // 저장 데이터에서도 삭제
+        // 从保存数据中删除
         plantSaveDataList.RemoveAll(data => data.position == position);
         RemovePlantData(position);
     }
@@ -114,11 +125,11 @@ public class PlantGrowthManager : MonoBehaviour
     {
         float floatDuration = 0.5f;
         float landDuration = 0.5f;
-        float smoothTime = 0.2f; // 부드럽게 이동할 시간
-        Vector2 velocity = Vector2.zero; // 속도를 관리하기 위한 변수
+        float smoothTime = 0.2f; // 平滑移动时间
+        Vector2 velocity = Vector2.zero; // 用于管理速度的变量
 
         Vector2 initialPosition = plant.transform.position;
-        Vector2 floatTargetPosition = initialPosition + new Vector2(0, 0.5f); // 살짝 위로 떠오를 목표 지점
+        Vector2 floatTargetPosition = initialPosition + new Vector2(0, 0.5f); // 稍微向上漂浮的目标位置
 
         float elapsedTime = 0;
 
@@ -126,25 +137,25 @@ public class PlantGrowthManager : MonoBehaviour
         if (interactable != null)
             interactable.canInteract = false;
 
-        // 위로 부드럽게 떠오르는 애니메이션
+        // 向上平滑漂浮动画
         while (elapsedTime < floatDuration)
         {
             plant.transform.position = Vector2.SmoothDamp(plant.transform.position, floatTargetPosition, ref velocity, smoothTime);
             elapsedTime += Time.deltaTime;
-            yield return null; // 다음 프레임을 기다림
+            yield return null; // 等待下一帧
         }
 
-        // 정확한 위치로 설정
+        // 设置为准确位置
         plant.transform.position = floatTargetPosition;
 
-        // 약간 대기
+        // 稍微等待
         yield return new WaitForSeconds(0.1f);
 
-        // 착지할 때 다시 속도 초기화
+        // 着陆时再次初始化速度
         velocity = Vector2.zero;
         elapsedTime = 0;
 
-        // 아래로 부드럽게 내려오는 애니메이션
+        // 向下平滑着陆动画
         while (elapsedTime < landDuration)
         {
             if (plant != null)
@@ -157,37 +168,45 @@ public class PlantGrowthManager : MonoBehaviour
                 interactable.canInteract = true;
             }
 
-            yield return null; // 다음 프레임을 기다림
+            yield return null; // 等待下一帧
         }
 
-        // 마지막으로 정확한 착지 위치로 설정
+        // 最后设置为准确的着陆位置
         plant.transform.position = initialPosition;
     }
 
+    /// <summary>
+    /// 当一天结束时触发的方法，处理浇水植物的生长和瓷砖颜色恢复。
+    /// </summary>
     void OnDayEnd()
     {
-        // wateredTiles의 키를 미리 복사하여 List에 저장
+        // 预先将wateredTiles的键复制到List中，避免在迭代过程中修改字典导致异常
         List<Vector3Int> wateredTilesKey = GameManager.instance.tileManager.GetWateredTilesKeys();
 
-        // 물을 준 식물만 성장하도록
+        // 仅让浇水的植物生长
         foreach (var position in wateredTilesKey)
         {
+            // 检查该位置是否已浇水且存在植物生长数据
             if (GameManager.instance.tileManager.GetWateringTile(position) && plantGrowthDays.ContainsKey(position))
             {
+                // 启动植物生长协程
                 StartCoroutine(GrowPlant(position));
+                // 重置该位置的浇水状态为未浇水
                 GameManager.instance.tileManager.SetWateringTile(position, false);
             }
 
+            // 获取该位置的瓷砖
             TileBase tile = GameManager.instance.tileManager.interactableMap.GetTile(position);
+            // 如果瓷砖存在，将其颜色设置为白色
             if (tile != null)
                 GameManager.instance.tileManager.interactableMap.SetColor(position, Color.white);
         }
     }
 
-    // 식물의 상태 저장
+    // 保存植物状态
     public List<PlantSaveData> SavePlantDataList()
     {
-        plantSaveDataList.Clear(); // 기존 저장 데이터 초기화
+        plantSaveDataList.Clear(); // 初始化现有保存数据
 
         foreach (var position in plantDataDict.Keys)
         {
@@ -202,7 +221,7 @@ public class PlantGrowthManager : MonoBehaviour
         return plantSaveDataList;
     }
 
-    // 저장된 식물 데이터를 기반으로 타일과 관련된 정보 설정
+    // 根据保存的植物数据设置瓷砖相关信息
     public void SetTilePlantSaveData(List<PlantSaveData> plantSaveDataList)
     {
         foreach (var saveData in plantSaveDataList)
@@ -251,6 +270,3 @@ public class PlantGrowthManager : MonoBehaviour
         plantSaveDataList.Clear();
     }
 }
-
-
-
