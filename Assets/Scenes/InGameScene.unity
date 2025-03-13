@@ -1787,6 +1787,7 @@ GameObject:
   m_Component:
   - component: {fileID: 368084176}
   - component: {fileID: 368084177}
+  - component: {fileID: 368084178}
   m_Layer: 0
   m_Name: SaveData
   m_TagString: Untagged
@@ -1832,6 +1833,26 @@ MonoBehaviour:
       isSellable: 0
       item: {fileID: 0}
       plantData: {fileID: 0}
+--- !u!114 &368084178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368084175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f706db6d9e33ac479b3552ca5a707d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allRecipes:
+  - recipeID: Ax
+    resultItem: {fileID: 8663601979791512083, guid: 64df3052675e5fe428837d848a5b2fe5, type: 3}
+    resultAmount: 1
+    requirements:
+    - requiredItem: {fileID: 16698743336758711, guid: f69b4a33c62d2cc45bee4f7dc481f3f1, type: 3}
+      amount: 1
+    isUnlocked: 0
 --- !u!1 &374728769
 GameObject:
   m_ObjectHideFlags: 0
