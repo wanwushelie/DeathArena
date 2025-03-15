@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager instance;
+    public static event Action OnInventoryChanged;
 
     public Dictionary<string, Inventory> inventoryByName = new Dictionary<string, Inventory>();
 
@@ -88,5 +90,60 @@ public class InventoryManager : MonoBehaviour
         {
             inventory.Clear();
         }
+    }
+
+    /// <summary>
+    /// 检查是否有足够材料
+    /// </summary>
+    public bool HasEnoughMaterials(List<CraftingData.Recipe.ItemRequirement> requirements)
+    {
+        foreach (var requirement in requirements)
+        {
+            if (!HasEnoughItems(requirement.requiredItem.itemName, requirement.amount))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /// <summary>
+    /// 扣除合成材料
+    /// </summary>
+    public bool RemoveMaterials(List<CraftingData.Recipe.ItemRequirement> requirements)
+    {
+        if (!HasEnoughMaterials(requirements)) return false;
+
+        foreach (var requirement in requirements)
+        {
+            RemoveItem(requirement.requiredItem.itemName, requirement.amount);
+        }
+        return true;
+    }
+
+    // 在Add/Remove方法最后调用
+    private void NotifyInventoryChanged()
+    {
+        OnInventoryChanged?.Invoke();
+    }
+
+    public int GetItemCount(string itemName)
+    {
+        int count = 0;
+        count += backpack.GetItemCount(itemName);
+        count += toolbar.GetItemCount(itemName);
+        return count;
+    }
+
+    public bool HasEnoughItems(string itemName, int requiredAmount)
+    {
+        return GetItemCount(itemName) >= requiredAmount;
+    }
+
+    public bool RemoveItem(string itemName, int amount = 1)
+    {
+        if (toolbar.RemoveItem(itemName, amount))
+            return true;
+        return backpack.RemoveItem(itemName, amount);
     }
 }

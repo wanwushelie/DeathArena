@@ -193,6 +193,9 @@ public class SaveData : MonoBehaviour
         int currentMoney, int currentDay, int currentDayIndex, int sellingPrice,
         List<PlantSaveData> plant)
     {
+        // 确保保存最新的库存状态
+        SaveInventoryData();
+
         string filePath = Application.persistentDataPath + $"/GameData.json"; // 保存文件的路径
 
         GameSaveData gameSaveData = new GameSaveData // 创建游戏存档数据对象
@@ -329,5 +332,31 @@ public class SaveData : MonoBehaviour
         string saveDataPath = Application.persistentDataPath + "/GameData.json"; // 保存数据的路径
 
         return File.Exists(saveDataPath); // 检查文件是否存在
+    }
+
+    private void SaveInventoryData()
+    {
+        // 确保保存最新的库存状态
+        SaveInventory(InventoryManager.instance.backpack, "backpack");
+        SaveInventory(InventoryManager.instance.toolbar, "toolbar");
+    }
+
+    private void SaveInventory(Inventory inventory, string inventoryName)
+    {
+        var inventoryData = new InventoryData();
+        foreach (var slot in inventory.slots)
+        {
+            if (!string.IsNullOrEmpty(slot.itemName))
+            {
+                var slotData = new InventorySlotData
+                {
+                    itemName = slot.itemName,
+                    currentCount = slot.currentCount,
+                    plantName = slot.plantData?.plantName
+                };
+                inventoryData.slots.Add(slotData);
+            }
+        }
+        // 保存inventoryData到文件或数据库
     }
 }

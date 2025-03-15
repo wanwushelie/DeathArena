@@ -195,4 +195,30 @@ public class Inventory
             slot.ClearAll();
         }
     }
+
+    public int GetItemCount(string itemName)
+    {
+        int count = 0;
+        foreach (var slot in slots)
+        {
+            if (slot.itemName == itemName)
+                count += slot.currentCount;
+        }
+        return count;
+    }
+
+    public bool RemoveItem(string itemName, int amount = 1)
+    {
+        foreach (var slot in slots)
+        {
+            if (slot.itemName == itemName && slot.currentCount >= amount)
+            {
+                slot.currentCount -= amount;
+                if (slot.currentCount == 0)
+                    slot.ClearAll();
+                return true;
+            }
+        }
+        return false;
+    }
 }

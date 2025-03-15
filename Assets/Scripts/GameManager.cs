@@ -39,8 +39,11 @@ public class GameManager : MonoBehaviour
     {
         if (scene.name == "InGameScene")
         {
-            // 페이드 인 효과 적용
-            SoundManager.Instance.FadeIn(1f, "BGM/InGame"); // 2초 동안 페이드 인
+            // 确保SoundManager已初始化
+            if (SoundManager.Instance != null)
+            {
+                SoundManager.Instance.FadeIn(1f, "BGM/InGame"); // 2초 동안 페이드 인
+            }
 
             if (OutGameUI.instance.isNewGame)
             {

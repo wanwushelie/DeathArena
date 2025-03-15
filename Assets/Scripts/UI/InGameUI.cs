@@ -59,7 +59,7 @@ public class InGameUI : MonoBehaviour
         saveText.enabled = false;
         yesBtn.onClick.AddListener(() =>
         {
-            // SoundManager.Instance.Play("EFFECT/Click", SoundType.EFFECT);
+            //  SoundManager.Instance.Play("EFFECT/Click", SoundType.EFFECT);
             SoundManager.Instance.Play("控制游戏内UI的点击音效");
             GameManager.instance.timeManager.StartCoroutine(GameManager.instance.timeManager.EndDay());
             dayEndPanel.SetActive(false);
