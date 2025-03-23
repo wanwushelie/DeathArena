@@ -54,10 +54,10 @@ public class Player : MonoBehaviour
             return;
 
         GetInput();
-        UpdateAnimation();
-        PlantInteracted();
-        Hit();
-        HandlePostBoxInteraction();
+        UpdateAnimation();//获得输入，更新动画
+        PlantInteracted();// 处理植物交互逻辑，包括锄头开垦、播种、浇水和收获等操作。
+        Hit();// 处理玩家与树的交互逻辑，包括斧头砍树和树的生长等操作。
+        HandlePostBoxInteraction();// 处理玩家与开始交互箱子
 
     }
 
@@ -139,7 +139,7 @@ public class Player : MonoBehaviour
                 {
                     // SoundManager.Instance.Play("EFFECT/Pick", SoundType.EFFECT);
                     SoundManager.Instance.Play("拾取音效");
-                    InGameUI.instance.ShowPostPanel();
+                    InGameUI.instance.ShowPostPanel();// 显示邮箱面板并隐藏对话气泡
                 }
             }
         }

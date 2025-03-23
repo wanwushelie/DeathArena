@@ -218,10 +218,10 @@ public class InGameUI : MonoBehaviour
         saveText.enabled = false;
     }
 
-    public void ShowPostPanel()
+    public void ShowPostPanel()// 显示邮箱面板并隐藏对话气泡
     {
-        postBoxPanel.SetActive(true);
-        speechBubble.SetActive(false);
+        postBoxPanel.SetActive(true);// 激活邮箱面板
+        speechBubble.SetActive(false);// 隐藏对话气泡
     }
 
     public void ShakingText()

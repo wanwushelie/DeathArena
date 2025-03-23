@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a605d271a0637044aa519c80448f4af6, type: 3}
+  m_Name: ShopItemData 1
+  m_EditorClassIdentifier: 
+  item: {fileID: 4030688156493905607, guid: d34e373c477af3749b6182636084dca2, type: 3}
+  category: "\u70ED\u529B\u5B66"
+  knowledgeIntroductionImage: {fileID: 694212983, guid: 11740af8aaba0c34194cc379fdae6a99, type: 3}
+  isUnlocked: 0
+  price: 33

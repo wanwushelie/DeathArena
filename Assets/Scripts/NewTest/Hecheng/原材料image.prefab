@@ -252,6 +252,7 @@ MonoBehaviour:
   itemImage: {fileID: 7062728716303806965}
   itemNameText: {fileID: 842490821299700832}
   requiredAmountText: {fileID: 4638510710260116598}
+  playerItemAmount: {fileID: 3099100276105626663}
 --- !u!1 &8826943024132096531
 GameObject:
   m_ObjectHideFlags: 0

@@ -54,6 +54,31 @@ public class CraftingListManager : MonoBehaviour
             {
                 Debug.LogWarning("InGameUI instance is null!");
             }
+
+            // 刷新 RequirementItem 的 UI
+            RefreshRequirementItems();
+        }
+    }
+
+    private void RefreshRequirementItems()
+    {
+        // 遍历 contentPanel 下的所有 CraftingRecipeItem
+        foreach (Transform child in contentPanel)
+        {
+            var craftingItem = child.GetComponent<CraftingRecipeItem>();
+            if (craftingItem != null)
+            {
+                // 遍历 CraftingRecipeItem 下的所有 RequirementItem
+                foreach (Transform requirementChild in craftingItem.ingredientsPanel)
+                {
+                    var requirementItem = requirementChild.GetComponent<RequirementItem>();
+                    if (requirementItem != null)
+                    {
+                        // 重新初始化 RequirementItem
+                        requirementItem.Initialize(requirementItem.GetRequirement());
+                    }
+                }
+            }
         }
     }
 

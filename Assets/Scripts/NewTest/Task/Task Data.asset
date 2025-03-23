@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edf336300162c1342b4cc2018d6c065b, type: 3}
+  m_Name: Task Data
+  m_EditorClassIdentifier: 
+  tasks:
+  - taskName: "\u4EFB\u52A1\u4E00"
+    taskDescription: "\u8FD9\u662F\u4EFB\u52A1\u4E00\u7684\u63CF\u8FF0"
+    requirements:
+    - requiredItem: {fileID: 11400000, guid: 0c511d0e92554e54db84df7b32dc5855, type: 2}
+      amount: 1
+    - requiredItem: {fileID: 11400000, guid: 0c511d0e92554e54db84df7b32dc5855, type: 2}
+      amount: 1
+    rewardItem: {fileID: 11400000, guid: 90441768392fd5243b63f85f0acf9679, type: 2}
+    rewardAmount: 1
+    isCompleted: 0
+  - taskName: "\u4EFB\u52A1\u4E8C"
+    taskDescription: "\u4EFB\u52A1\u4E8C"
+    requirements:
+    - requiredItem: {fileID: 11400000, guid: 0394b7287e73f7b4c8e002f6a7398447, type: 2}
+      amount: 1
+    rewardItem: {fileID: 11400000, guid: 90441768392fd5243b63f85f0acf9679, type: 2}
+    rewardAmount: 1
+    isCompleted: 0
