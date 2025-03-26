@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using PolyNav;
 
 public class Player : MonoBehaviour
 {
@@ -48,6 +49,14 @@ public class Player : MonoBehaviour
         tileManager = FindObjectOfType<TileManager>();
     }
 
+    private void Start()
+    {
+        // 假设 PolyNavAgent 组件已经添加到玩家对象上
+        PolyNavAgent agent = GetComponent<PolyNavAgent>();
+        agent.OnMovementUpdated += UpdateAnimationFromAgent;
+    }
+
+
     private void Update()
     {
         if (GameManager.instance.timeManager.isDayEnding)
@@ -65,6 +74,24 @@ public class Player : MonoBehaviour
     {
         if (!GameManager.instance.timeManager.isDayEnding && !isHoeing && !isWatering && !isAxing)
             Move();
+    }
+
+
+    private void UpdateAnimationFromAgent(Vector2 direction, float speed)
+    {
+        anim.SetFloat("Horizontal", direction.x);
+        anim.SetFloat("Vertical", direction.y);
+        anim.SetFloat("Speed", speed);
+
+        // 更新最后移动方向
+        lastMoveDirection = direction;
+
+        // 处理闲置动画
+        if (speed == 0)
+        {
+            anim.SetFloat("LastHorizontal", lastMoveDirection.x);
+            anim.SetFloat("LastVertical", lastMoveDirection.y);
+        }
     }
 
     private void Move()

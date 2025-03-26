@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-[CreateAssetMenu(fileName = "Plant Data", menuName = "Plant Data", order = 50)]
+[CreateAssetMenu(fileName = "Plant Data", menuName = "Data/Plant Data")]
 public class PlantData : ScriptableObject
 {
     public string plantName = "Plant Name";

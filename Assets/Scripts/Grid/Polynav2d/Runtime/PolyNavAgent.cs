@@ -249,9 +249,20 @@ namespace PolyNav
             }
         }
 
+        public event Action<Vector2, float> OnMovementUpdated;
+        private Vector2 lastMovingDirection = Vector2.zero;
+        private float lastCurrentSpeed = 0f;
 
         //main loop
         void LateUpdate() {
+
+            // 在 LateUpdate 方法中，当移动方向或速度发生变化时，触发事件
+            if (movingDirection != lastMovingDirection || currentSpeed != lastCurrentSpeed)
+            {
+                OnMovementUpdated?.Invoke(movingDirection, currentSpeed);
+                lastMovingDirection = movingDirection;
+                lastCurrentSpeed = currentSpeed;
+            }
 
             if ( map == null ) {
                 return;
