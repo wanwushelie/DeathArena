@@ -93,8 +93,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.69, y: 2.69, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2552055863423827720}
   - {fileID: 8213219009904495630}
@@ -141,7 +141,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: -391122943, guid: 4bffa5d6383e7e547b492283063ff1eb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9351c88c78ad0204e8292a0def591037, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -184,18 +184,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.28062558}
+  m_Offset: {x: 0.03899169, y: 1.879303}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 1.5, y: 1.9375}
+    pivot: {x: 0.39326018, y: 0.047626324}
+    oldSize: {x: 25, y: 25}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.875, y: 0.56125116}
+  m_Size: {x: 2.9415846, y: 2.9787636}
   m_EdgeRadius: 0
 --- !u!95 &8129484809720633492
 Animator:
@@ -230,11 +230,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1e2a4b9acfdca142b5c53a93815c541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newSprite: {fileID: -1868528077, guid: 4bffa5d6383e7e547b492283063ff1eb, type: 3}
+  newSprite: {fileID: 21300000, guid: 9351c88c78ad0204e8292a0def591037, type: 3}
   fruitSpawnPos: {fileID: 2552055863423827720}
   fallPos: {fileID: 8213219009904495630}
-  WoodPrefab: {fileID: 3121230369053445424, guid: 8c5ca463ceaa639499042aaf0d393fd6, type: 3}
-  fruitPrefab: {fileID: 724418913424436359, guid: f69b4a33c62d2cc45bee4f7dc481f3f1, type: 3}
+  WoodPrefab: {fileID: 3121230369053445424, guid: a74bba1b82e13c848a821fae31994895, type: 3}
+  fruitPrefab: {fileID: 3121230369053445424, guid: ada5a770af6cb3f479bfcf6bb46a5fc2, type: 3}
   hitCount: 0
   isFruitTree: 1
 --- !u!61 &6629279604904150382
@@ -269,16 +269,16 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.007499218, y: 1.1638849}
+  m_Offset: {x: 1.9586797, y: 13.188215}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 1.5, y: 1.9375}
+    pivot: {x: 0.39326018, y: 0.047626324}
+    oldSize: {x: 25, y: 25}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6437969, y: 1.1860862}
+  m_Size: {x: 14.068894, y: 19.659912}
   m_EdgeRadius: 0
