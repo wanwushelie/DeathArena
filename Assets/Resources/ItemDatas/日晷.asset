@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "\u65E5\u6677"
   m_EditorClassIdentifier: 
   itemName: "\u65E5\u6677"
-  icon: {fileID: 21300000, guid: 9b639abd1efcf1548ad7ba9bd779c7b5, type: 3}
+  icon: {fileID: 21300000, guid: ff00e2fdd46a6764a8b2edb6354f829b, type: 3}
   price: 100
   maxAllowed: 1
   isSellable: 1
