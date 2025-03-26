@@ -17,7 +17,6 @@ public class Player : MonoBehaviour
     public InventoryManager inventoryManager;
     public Tilemap houseRoofTileMap;
     public int money = 0;
-    private bool isPlayerInPostBox = false;
 
     private TileManager tileManager;
     private Vector3Int targetPosition;
@@ -57,7 +56,6 @@ public class Player : MonoBehaviour
         UpdateAnimation();//获得输入，更新动画
         PlantInteracted();// 处理植物交互逻辑，包括锄头开垦、播种、浇水和收获等操作。
         Hit();// 处理玩家与树的交互逻辑，包括斧头砍树和树的生长等操作。
-        HandlePostBoxInteraction();// 处理玩家与开始交互箱子
 
     }
 
@@ -129,21 +127,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void HandlePostBoxInteraction()
-    {
-        if (isPlayerInPostBox)
-        {
-            if (InGameUI.instance.speechBubble.activeSelf)
-            {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    // SoundManager.Instance.Play("EFFECT/Pick", SoundType.EFFECT);
-                    SoundManager.Instance.Play("拾取音效");
-                    InGameUI.instance.ShowPostPanel();// 显示邮箱面板并隐藏对话气泡
-                }
-            }
-        }
-    }
 
     private void Hit()
     {
@@ -343,10 +326,6 @@ public class Player : MonoBehaviour
             if(houseRoofTileMap != null)
                 houseRoofTileMap.color = new Color(1f, 1f, 1f, 0f);
         }
-        else if (other.gameObject.CompareTag("PostBox"))
-        {
-            isPlayerInPostBox = true;
-        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -359,10 +338,6 @@ public class Player : MonoBehaviour
         {
             if(houseRoofTileMap != null)
                 houseRoofTileMap.color = new Color(1f, 1f, 1f, 1f);
-        }
-        else if (other.gameObject.CompareTag("PostBox"))
-        {
-            isPlayerInPostBox = false;
         }
     }
 

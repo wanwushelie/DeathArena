@@ -63290,8 +63290,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8400603400522103004, guid: d9b6dab7a8831834ea2d858de9134854, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8235188952698634089}
   m_SourcePrefab: {fileID: 100100000, guid: d9b6dab7a8831834ea2d858de9134854, type: 3}
+--- !u!1 &4746067706652800540 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8400603400522103004, guid: d9b6dab7a8831834ea2d858de9134854, type: 3}
+  m_PrefabInstance: {fileID: 4746067706652800539}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4800447904311378535 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8449633265990673209, guid: 3369695dfbcd391499b2ad3d4acebf1f, type: 3}
@@ -65783,7 +65791,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4195150299285007682, guid: d9b6dab7a8831834ea2d858de9134854, type: 3}
   m_PrefabInstance: {fileID: 4746067706652800539}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 4746067706652800540}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 368daa4eaf02141438576482fa54eecf, type: 3}
@@ -65794,12 +65802,27 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5864131022845358242, guid: d9b6dab7a8831834ea2d858de9134854, type: 3}
   m_PrefabInstance: {fileID: 4746067706652800539}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 4746067706652800540}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4a1fa91a628e124eb97ea48bc1e0cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8235188952698634089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4746067706652800540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a048040764289b74c856ba3ef6d0eac4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 8235188952698634088}
+  inGameUI: {fileID: 1154950872}
+  postBoxTag: PostBox
 --- !u!68 &8394872170319279638
 EdgeCollider2D:
   m_ObjectHideFlags: 0
