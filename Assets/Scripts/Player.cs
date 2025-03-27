@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     private bool isWatering = false;
     private bool isAxing = false;
     private bool isMoving = false;
+    public bool isPicking = false;
 
 
     private void Awake()
@@ -106,6 +107,12 @@ public class Player : MonoBehaviour
             MouseSelect mouseSelect = GetComponentInChildren<MouseSelect>();
             mouseSelect.SetSpriteColor(new Color(0, 0, 0, 0));
         }
+
+        // Picking 动画
+        if (isPicking)
+        {
+            anim.SetTrigger("isPicking");
+        }
     }
 
     private IEnumerator WaitForAnimation()
@@ -124,6 +131,15 @@ public class Player : MonoBehaviour
         {
             yield return new WaitForSeconds(0.7f);
             isAxing = false;
+        }
+    }
+
+    public IEnumerator WaitForPickingAnimation()
+    {
+        if (isPicking)
+        {
+            yield return new WaitForSeconds(0.2f); // 根据实际动画时长调整
+            isPicking = false;
         }
     }
 

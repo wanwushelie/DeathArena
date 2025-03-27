@@ -8,7 +8,7 @@ public class ShoppingCartManager : MonoBehaviour
 
     private List<Item> cartItems = new List<Item>();
     private int totalCost = 0;
-    public Player player; // 玩家对象
+    public Player player; //  玩家对象
 
     void Awake()
     {

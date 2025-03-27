@@ -17,7 +17,7 @@ public class ClickableShop : MonoBehaviour
 
     private Item selectedItem; // 当前选中的物品
     private bool isShopPanelOpen = false; // 用于记录面板是否打开，默认为关闭
-    private string currentCategory = "全部"; // 当前选中的分类，默认为“全部”
+    private string currentCategory = "全部"; //  当前选中的分类，默认为“全部”
 
     void Start()
     {
