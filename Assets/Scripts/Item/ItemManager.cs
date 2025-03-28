@@ -37,4 +37,17 @@ public class ItemManager : MonoBehaviour
 
         return null;
     }
+
+    public FoodData GetFoodData(string key)
+    {
+        if (nameToItemDict.ContainsKey(key))
+        {
+            Item item = nameToItemDict[key];
+            if (item.GetComponent<FoodData>() != null)
+            {
+                return item.GetComponent<FoodData>();
+            }
+        }
+        return null;
+    }
 }

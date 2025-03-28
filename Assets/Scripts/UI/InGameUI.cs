@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Debug = UnityEngine.Debug;
 
 public class InGameUI : MonoBehaviour
 {
@@ -36,6 +38,11 @@ public class InGameUI : MonoBehaviour
     private bool isInventoryMoving = false;
     private Shop shop;
     private ItemSellingBox itemSellingBox;
+
+    public TextMeshProUGUI staminaText; // 精力值文本
+    public Slider staminaSlider; // 精力值滑动条
+    public Slider healthSlider; // 血量滑动条
+    public Slider satiationSlider; // 饱腹值滑动条
 
     private void Awake()
     {
@@ -116,6 +123,29 @@ public class InGameUI : MonoBehaviour
             if (settingPanel.activeSelf)
                 settingPanel.SetActive(false);
         }
+
+        // 更新精力值滑动条
+        if (Player.Instance != null)
+        {
+            staminaSlider.value = Player.Instance.stamina / Player.Instance.maxStamina;
+            staminaText.text = $"{Mathf.Round(Player.Instance.stamina)} / {Player.Instance.maxStamina}";
+            healthSlider.value = Player.Instance.health / Player.Instance.maxHealth;
+            satiationSlider.value = Player.Instance.satiation / Player.Instance.maxSatiation;
+        }
+
+        // if (Input.GetMouseButtonDown(0))
+        // {
+        //     Vector3 mousePosition = Input.mousePosition;
+        //     Vector3 worldMousePosition = UnityEngine.Camera.main.ScreenToWorldPoint(mousePosition);
+        //     worldMousePosition.z = 0;
+
+        //     if (Vector2.Distance((Vector2)transform.position, (Vector2)worldMousePosition) < 50f)
+        //     {
+        //         Player.Instance.OnSelfClick();
+        //         Debug.Log("点击到自己");
+        //     }
+        // }
+
     }
 
     #region 인벤토리 UI 

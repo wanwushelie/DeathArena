@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 
@@ -16,6 +17,9 @@ public class Inventory
         public bool isSellable; // 是否可出售
         public Item item; // 物品对象
         public PlantData plantData; // 植物数据（如果适用）
+        public FoodData foodData; // 食物数据（如果适用）
+        public ShopItemData shopItemData; // 商店物品数据（如果适用）
+
 
         public Slot()
         {
@@ -26,6 +30,8 @@ public class Inventory
             isSellable = false;
             plantData = null;
             item = null;
+            foodData = null;
+            shopItemData = null;
         }
 
         // 检查槽位是否为空
@@ -46,11 +52,14 @@ public class Inventory
         // 向槽位中添加物品
         public void AddItem(Item item, int count = 1)
         {
+            this.item = item;
             this.itemName = item.itemData.itemName;
             this.icon = item.itemData.icon;
             this.price = item.itemData.price;
             this.maxAllowed = item.itemData.maxAllowed;
             this.plantData = item.plantData;
+            this.foodData = item.foodData;
+            this.shopItemData = item.shopItemData;
             this.isSellable = item.itemData.isSellable;
             this.item = item;
             currentCount += count;
@@ -75,6 +84,8 @@ public class Inventory
             icon = null;
             itemName = "";
             plantData = null;
+            foodData = null;
+            shopItemData = null;
         }
 
         // 清空槽位
@@ -86,6 +97,8 @@ public class Inventory
             price = 0;
             isSellable = false;
             plantData = null;
+            foodData = null;
+            shopItemData = null;
             item = null;
         }
         // 获取剩余空间

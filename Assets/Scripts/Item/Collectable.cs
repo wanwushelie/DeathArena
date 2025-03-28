@@ -18,7 +18,7 @@ public class Collectable : MonoBehaviour
                 StartCoroutine(player.WaitForPickingAnimation()); // 等待动画播放完毕
                 player.isPicking = false; // 设置 Picking 标志
 
-                SoundManager.Instance.Play("EFFECT/Pick", SoundType.EFFECT);
+                // SoundManager.Instance.Play("EFFECT/Pick", SoundType.EFFECT);
                 player.inventoryManager.Add(item);
                 Destroy(this.gameObject);
             }

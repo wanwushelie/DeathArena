@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 /* 游戏内各种库存的管理
     背包、工具栏 */
@@ -44,6 +46,13 @@ public class InventoryManager : MonoBehaviour
 
     public void Add(Item item)
     {
+        // 拾取物品时可能没有正确设置itemData或plantData
+        if (item.itemData == null)
+        {
+            Debug.LogError("添加的物品缺少itemData");
+            return;
+        }
+        Debug.Log("添加物品：" + item.itemData.itemName);
         if(toolbar.Add(item))
         {
             return;
