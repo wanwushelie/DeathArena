@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
     private bool isMoving = false;
     public bool isPicking = false;
     public bool isHarvesting = false;
+    public bool isMining = false; //是否在开采石块
 
     public float stamina = 100f; // 当前精力值
     public float maxStamina = 100f; // 最大精力值
@@ -39,6 +40,7 @@ public class Player : MonoBehaviour
     public float satiation = 100f; // 当前饱腹值
     public float maxSatiation = 100f; // 最大饱腹值
     public float satiationDecreaseRate = 1f; // 饱腹值减少速率（每秒减少的量）
+
 
 
 
@@ -70,6 +72,7 @@ public class Player : MonoBehaviour
         UpdateAnimation();//获得输入，更新动画
         PlantInteracted();// 处理植物交互逻辑，包括锄头开垦、播种、浇水和收获等操作。
         Hit();// 处理玩家与树的交互逻辑，包括斧头砍树和树的生长等操作。
+        Hit1();// 处理玩家与石块的交互逻辑，包括斧头开采石块和石块的生长等操作。
         
         // 随时间恢复精力值
         if (stamina < maxStamina)
@@ -107,11 +110,12 @@ public class Player : MonoBehaviour
                 Debug.Log("点击到自己");
             }
         }
+
     }
 
     private void FixedUpdate()
     {
-        if (!GameManager.instance.timeManager.isDayEnding && !isHoeing && !isWatering && !isAxing)
+        if (!GameManager.instance.timeManager.isDayEnding && !isHoeing && !isWatering && !isAxing && !isPicking && !isHarvesting && !isMining)
             Move();
     }
 
@@ -147,7 +151,7 @@ public class Player : MonoBehaviour
     public void FoodInteracted()
     {
         // 如果正在其他交互状态，不进行后续操作
-        if (isHoeing || isWatering || isAxing) return;
+        if (isHoeing || isWatering || isAxing || isPicking || isHarvesting || isMining) return;
         
         // 检查工具栏是否有选中物品
         if (inventoryManager == null || 
@@ -245,6 +249,11 @@ public class Player : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
             isHarvesting = false;
         }
+        else if (isMining)
+        {
+            yield return new WaitForSeconds(0.2f);
+            isMining = false;
+        }
     }
 
     public IEnumerator WaitForPickingAnimation()
@@ -273,6 +282,35 @@ public class Player : MonoBehaviour
                     isAxing = true;
                     anim.SetTrigger("isAxing");
                     tree.hitCount++;
+                    ConsumeStamina(5f); // 消耗精力值
+                    StartCoroutine(WaitForAnimation());
+                }
+                else
+                {
+                    Debug.Log("精力不足，无法砍树！");
+                    // 可以在这里添加UI提示，告知玩家精力不足
+                }
+            }
+        }
+    }
+
+    private void Hit1()
+    {
+        rayHit = Physics2D.Raycast(rb.position, lastMoveDirection, 1f, LayerMask.GetMask("Stone"));
+        if (rayHit.collider != null)
+        {  
+            Stone stone = rayHit.collider.GetComponent<Stone>();
+            if (Input.GetMouseButtonDown(0))
+            {
+                // 检查精力值是否足够
+                if (stamina >= 10f) // 假设砍树消耗10点精力
+                {
+                    //SoundManager.Instance.Play("EFFECT/HITTREE", SoundType.EFFECT);
+                    SoundManager.Instance.Play("开采石块音效");
+                    isMining = true;
+                    anim.SetTrigger("isHoeing");//用锄地的动画
+                    stone.hitCount++;
+                    Debug.Log(stone.hitCount);
                     ConsumeStamina(5f); // 消耗精力值
                     StartCoroutine(WaitForAnimation());
                 }
