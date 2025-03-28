@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     private bool isAxing = false;
     private bool isMoving = false;
     public bool isPicking = false;
+    public bool isHarvesting = false;
 
     public float stamina = 100f; // 当前精力值
     public float maxStamina = 100f; // 最大精力值
@@ -159,33 +160,6 @@ public class Player : MonoBehaviour
         {
             EatFood(); // 执行食用逻辑
         }
-        
-        // // 获取选中物品
-        // Item selectedItem = inventoryManager.toolbar.selectedSlot.item;
-        // Debug.Log("选中物品：" + selectedItem.itemData.itemName);
-        // FoodData foodData = selectedItem.foodData;
-        // // 输出食物数据
-        // if (foodData!= null)
-        // {
-        //     Debug.Log("饱腹值恢复：" + foodData.satiationRecovery);
-        //     Debug.Log("血量恢复：" + foodData.healthRecovery);
-        //  }
-
-        // // 检查是否是食物
-        // if (foodData != null)
-        // {
-        //     // 执行食用逻辑
-        //     EatFood(foodData);
-            
-        //     // 消耗食物
-        //     inventoryManager.toolbar.selectedSlot.RemoveItem();
-            
-        //     // 如果食物用完，清空插槽
-        //     if (inventoryManager.toolbar.selectedSlot.isEmpty)
-        //     {
-        //         inventoryManager.toolbar.selectedSlot = null;
-        //     }
-        // }
     }
 
     private void GameOver()
@@ -266,6 +240,11 @@ public class Player : MonoBehaviour
             yield return new WaitForSeconds(0.7f);
             isAxing = false;
         }
+        else if (isHarvesting)
+        {
+            yield return new WaitForSeconds(0.2f);
+            isHarvesting = false;
+        }
     }
 
     public IEnumerator WaitForPickingAnimation()
@@ -294,7 +273,7 @@ public class Player : MonoBehaviour
                     isAxing = true;
                     anim.SetTrigger("isAxing");
                     tree.hitCount++;
-                    ConsumeStamina(10f); // 消耗精力值
+                    ConsumeStamina(5f); // 消耗精力值
                     StartCoroutine(WaitForAnimation());
                 }
                 else
@@ -388,11 +367,10 @@ public class Player : MonoBehaviour
                         if (tileName == "InteractableTile")
                         {
                             // 检查精力值是否足够
-                            if (stamina >= 8f) // 假设锄地消耗8点精力
+                            if (stamina >= 5f) // 假设锄地消耗8点精力
                             {
                                 isHoeing = true; 
                                 anim.SetTrigger("isHoeing"); 
-                                ConsumeStamina(8f); // 消耗精力值
                             }
                             else
                             {
@@ -406,11 +384,13 @@ public class Player : MonoBehaviour
                         if (tileState == "Grown")
                         {
                             // 检查精力值是否足够
-                            if (stamina >= 10f) // 假设收获消耗10点精力
+                            if (stamina >= 5f) // 假设收获消耗10点精力
                             {
                                 tileManager.RemoveTile(targetPosition); 
                                 GameManager.instance.plantGrowthManager.HarvestPlant(targetPosition); 
                                 ConsumeStamina(5f); // 消耗精力值
+                                isHarvesting = true;
+                                anim.SetTrigger("isHarvesting"); // 设置收获动画触发器
                             }
                             else
                             {
@@ -448,7 +428,6 @@ public class Player : MonoBehaviour
                             {
                                 isWatering = true; 
                                 anim.SetTrigger("isWatering"); 
-                                ConsumeStamina(5f); // 消耗精力值
                             }
                             else
                             {
