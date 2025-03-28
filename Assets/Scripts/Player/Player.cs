@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
     public float maxHealth = 100f; // 最大血量
     public float satiation = 100f; // 当前饱腹值
     public float maxSatiation = 100f; // 最大饱腹值
-    public float satiationDecreaseRate = 0.1f; // 饱腹值减少速率（每秒减少的量）
+    public float satiationDecreaseRate = 1f; // 饱腹值减少速率（每秒减少的量）
 
 
 
@@ -114,38 +114,35 @@ public class Player : MonoBehaviour
             Move();
     }
 
-    public void EatFood(FoodData food)
+    public void EatFood()
     {
+        FoodData food = inventoryManager.toolbar.selectedSlot.foodData;
+        inventoryManager.toolbar.selectedSlot.RemoveItem();  // 减少种子数量
         // 恢复饱腹值和血量
         satiation = Mathf.Min(satiation + food.satiationRecovery, maxSatiation);
         health = Mathf.Min(health + food.healthRecovery, maxHealth);
+
+        if (inventoryManager.toolbar.selectedSlot.isEmpty)
+        {
+            inventoryManager.toolbar.selectedSlot = null;
+        }
 
         // 播放食用动画和音效
         // anim.SetTrigger("Eat");
         // SoundManager.Instance.Play("EFFECT/Eat", SoundType.EFFECT);
     }
+    private void Sowing()
+    {
+        PlantData plantData = inventoryManager.toolbar.selectedSlot.plantData;
+        inventoryManager.toolbar.selectedSlot.RemoveItem();  // 减少种子数量
+        GameManager.instance.plantGrowthManager.PlantSeed(targetPosition, plantData);  // 播种
 
-    // public void OnSelfClick()
-    // {
-    //     if (inventoryManager.toolbar.selectedSlot != null && inventoryManager.toolbar.selectedSlot.item != null)
-    //     {
-    //         Debug.Log("使用方法");
-    //         Item selectedItem = inventoryManager.toolbar.selectedSlot.item;
-    //         FoodData foodData = selectedItem.foodData; // 获取食物数据
-    //         if (foodData != null)
-    //         {
-    //             EatFood(foodData);
-    //             Debug.Log("移除物体");
-    //             inventoryManager.toolbar.selectedSlot.RemoveItem();
-
-    //             if (inventoryManager.toolbar.selectedSlot.isEmpty)
-    //             {
-    //                 inventoryManager.toolbar.selectedSlot = null;
-    //             }
-    //         }
-    //     }
-    // }
-
+        // 如果种子用完，清空插槽
+        if (inventoryManager.toolbar.selectedSlot.isEmpty)
+        {
+            inventoryManager.toolbar.selectedSlot = null;
+        }
+    }
     public void FoodInteracted()
     {
         // 如果正在其他交互状态，不进行后续操作
@@ -154,38 +151,41 @@ public class Player : MonoBehaviour
         // 检查工具栏是否有选中物品
         if (inventoryManager == null || 
             inventoryManager.toolbar == null || 
-            inventoryManager.toolbar.selectedSlot == null || 
-            inventoryManager.toolbar.selectedSlot.item == null)
+            inventoryManager.toolbar.selectedSlot == null)
         {
             return;
         }
-
-        // 获取选中物品
-        Item selectedItem = inventoryManager.toolbar.selectedSlot.item;
-        Debug.Log("选中物品：" + selectedItem.itemData.itemName);
-        FoodData foodData = selectedItem.foodData;
-        // 输出食物数据
-        if (foodData!= null)
+        if (inventoryManager.toolbar.selectedSlot.itemName == "椰子")
         {
-            Debug.Log("饱腹值恢复：" + foodData.satiationRecovery);
-            Debug.Log("血量恢复：" + foodData.healthRecovery);
-         }
-
-        // 检查是否是食物
-        if (foodData != null)
-        {
-            // 执行食用逻辑
-            EatFood(foodData);
-            
-            // 消耗食物
-            inventoryManager.toolbar.selectedSlot.RemoveItem();
-            
-            // 如果食物用完，清空插槽
-            if (inventoryManager.toolbar.selectedSlot.isEmpty)
-            {
-                inventoryManager.toolbar.selectedSlot = null;
-            }
+            EatFood(); // 执行食用逻辑
         }
+        
+        // // 获取选中物品
+        // Item selectedItem = inventoryManager.toolbar.selectedSlot.item;
+        // Debug.Log("选中物品：" + selectedItem.itemData.itemName);
+        // FoodData foodData = selectedItem.foodData;
+        // // 输出食物数据
+        // if (foodData!= null)
+        // {
+        //     Debug.Log("饱腹值恢复：" + foodData.satiationRecovery);
+        //     Debug.Log("血量恢复：" + foodData.healthRecovery);
+        //  }
+
+        // // 检查是否是食物
+        // if (foodData != null)
+        // {
+        //     // 执行食用逻辑
+        //     EatFood(foodData);
+            
+        //     // 消耗食物
+        //     inventoryManager.toolbar.selectedSlot.RemoveItem();
+            
+        //     // 如果食物用完，清空插槽
+        //     if (inventoryManager.toolbar.selectedSlot.isEmpty)
+        //     {
+        //         inventoryManager.toolbar.selectedSlot = null;
+        //     }
+        // }
     }
 
     private void GameOver()
@@ -496,19 +496,6 @@ public class Player : MonoBehaviour
         tileManager.WaterTile(targetPosition);
         ConsumeStamina(5f); // 假设浇水消耗5点精力
         StartCoroutine(WaitForAnimation());
-    }
-
-    private void Sowing()
-    {
-        PlantData plantData = inventoryManager.toolbar.selectedSlot.plantData;
-        inventoryManager.toolbar.selectedSlot.RemoveItem();  // 减少种子数量
-        GameManager.instance.plantGrowthManager.PlantSeed(targetPosition, plantData);  // 播种
-
-        // 如果种子用完，清空插槽
-        if (inventoryManager.toolbar.selectedSlot.isEmpty)
-        {
-            inventoryManager.toolbar.selectedSlot = null;
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
