@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.82, y: 0.69, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -147,7 +147,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -2.012011, y: 0.22201514}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -158,7 +158,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.625}
+  m_Size: {x: 9.075799, y: 6.674911}
   m_EdgeRadius: 0
 --- !u!114 &693802677945950094
 MonoBehaviour:
@@ -172,9 +172,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee6bb4c47463d8247b046887abbcecff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: 4a4198fc5b8c5be4c9aac916078c0e4b, type: 2}
+  itemData: {fileID: 11400000, guid: 3fb553e11b617674391c2afd9fe71cdf, type: 2}
   plantData: {fileID: 0}
-  canInteract: 0
+  shopItemData: {fileID: 0}
+  foodData: {fileID: 0}
+  canInteract: 1
   isDropped: 0
   droppedCount: 0
   rigid: {fileID: 0}
@@ -190,3 +192,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 883675ec1d208e84f990356347d42b1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canCollect: 0

@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 8306573592587738617}
   - component: {fileID: 5957337988383556557}
   - component: {fileID: 616159103848408909}
-  - component: {fileID: 693802677945950094}
-  - component: {fileID: 8325064520456349857}
   m_Layer: 0
   m_Name: "\u704C\u6728\u4E1B"
   m_TagString: Untagged
@@ -31,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.82, y: 0.69, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -160,33 +158,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.625}
   m_EdgeRadius: 0
---- !u!114 &693802677945950094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3121230369053445424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee6bb4c47463d8247b046887abbcecff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: 4a4198fc5b8c5be4c9aac916078c0e4b, type: 2}
-  plantData: {fileID: 0}
-  canInteract: 0
-  isDropped: 0
-  droppedCount: 0
-  rigid: {fileID: 0}
---- !u!114 &8325064520456349857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3121230369053445424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 883675ec1d208e84f990356347d42b1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

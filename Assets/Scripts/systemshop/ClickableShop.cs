@@ -96,10 +96,11 @@ public class ClickableShop : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-
+        Debug.Log($"Total items: {itemManager.items.Length}");  // Changed from .Count to .Length
         // 动态生成商品项
         foreach (Item item in itemManager.items)
         {
+            Debug.Log($"Item: {item.itemData?.itemName}, ShopData: {item.shopItemData != null}, Unlocked: {item.shopItemData?.isUnlocked}, Category: {item.shopItemData?.category}");
             if (item.shopItemData != null && item.shopItemData.isUnlocked && 
                 (currentCategory == "全部" || item.shopItemData.category == currentCategory))
             {
@@ -169,7 +170,7 @@ public class ClickableShop : MonoBehaviour
         // 根据当前选中的分类动态生成商品项
         foreach (Item item in itemManager.items)
         {
-            if (item.shopItemData != null && item.shopItemData.isUnlocked && 
+            if (item.shopItemData != null && item.shopItemData.isUnlocked &&
                 (currentCategory == "全部" || item.shopItemData.category == currentCategory))
             {
                 GameObject itemObj = Instantiate(shopItemPrefab, itemsParent);

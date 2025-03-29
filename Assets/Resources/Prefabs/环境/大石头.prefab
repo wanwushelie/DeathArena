@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8807744641584754400}
   - component: {fileID: 977809795001422042}
-  - component: {fileID: 5856869774019778977}
   - component: {fileID: 2927288901042851254}
   - component: {fileID: 1296213589808174411}
+  - component: {fileID: 558940370943626316}
   m_Layer: 13
   m_Name: "\u5927\u77F3\u5934"
   m_TagString: Untagged
@@ -87,20 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5856869774019778977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6470507081846480963}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8971959bedbae48428e4d52aa7448e76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stonePrefab: {fileID: 7639519849782787676, guid: 3812e14c66e2eb04d9e43dc84af92d68, type: 3}
-  hitCount: 0
 --- !u!61 &2927288901042851254
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -191,3 +177,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 11.873358, y: 1.4663992}
   m_EdgeRadius: 0
+--- !u!114 &558940370943626316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6470507081846480963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c7a34a2ec099f0409657363ebcdaca7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stonePrefab: {fileID: 7639519849782787676, guid: 3812e14c66e2eb04d9e43dc84af92d68, type: 3}
+  hitCount: 0

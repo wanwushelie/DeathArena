@@ -149,4 +149,29 @@ public class CraftingListManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    // 新增的方法
+    public void CraftRecipeInternal(CraftingData.Recipe recipe, CraftingRecipeItem craftingItem)
+    {
+        if (TryCraft(recipe))
+        {
+            Debug.Log($"成功合成 {recipe.resultItem.itemName}");
+            UpdateCraftButtonStateInternal(craftingItem, recipe);
+            
+            foreach (Transform child in craftingItem.ingredientsPanel)
+            {
+                var requirementItem = child.GetComponent<RequirementItem>();
+                requirementItem.Initialize(requirementItem.GetRequirement());
+            }
+        }
+        else
+        {
+            Debug.LogWarning("合成失败：材料不足");
+        }
+    }
+
+    public void UpdateCraftButtonStateInternal(CraftingRecipeItem craftingItem, CraftingData.Recipe recipe)
+    {
+        craftingItem.craftButton.interactable = HasEnoughMaterials(recipe.requirements);
+    }
 }

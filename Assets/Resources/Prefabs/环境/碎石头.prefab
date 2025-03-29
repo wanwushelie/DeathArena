@@ -131,7 +131,7 @@ MonoBehaviour:
   plantData: {fileID: 0}
   shopItemData: {fileID: 0}
   foodData: {fileID: 0}
-  canInteract: 0
+  canInteract: 1
   isDropped: 0
   droppedCount: 0
   rigid: {fileID: 0}
@@ -192,3 +192,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 883675ec1d208e84f990356347d42b1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canCollect: 0

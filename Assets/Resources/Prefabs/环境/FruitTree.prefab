@@ -74,8 +74,8 @@ GameObject:
   - component: {fileID: 8383307156735935321}
   - component: {fileID: 4221196550097003820}
   - component: {fileID: 8129484809720633492}
-  - component: {fileID: 5566891832000021921}
   - component: {fileID: 6629279604904150382}
+  - component: {fileID: 2729092177445004463}
   m_Layer: 6
   m_Name: FruitTree
   m_TagString: Tree
@@ -218,25 +218,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5566891832000021921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7270640091312228301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1e2a4b9acfdca142b5c53a93815c541, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  newSprite: {fileID: 21300000, guid: 9351c88c78ad0204e8292a0def591037, type: 3}
-  fruitSpawnPos: {fileID: 2552055863423827720}
-  fallPos: {fileID: 8213219009904495630}
-  WoodPrefab: {fileID: 3121230369053445424, guid: a74bba1b82e13c848a821fae31994895, type: 3}
-  fruitPrefab: {fileID: 3121230369053445424, guid: ada5a770af6cb3f479bfcf6bb46a5fc2, type: 3}
-  hitCount: 0
-  isFruitTree: 1
 --- !u!61 &6629279604904150382
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -282,3 +263,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 14.068894, y: 19.659912}
   m_EdgeRadius: 0
+--- !u!114 &2729092177445004463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7270640091312228301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77b9b1c50f4550742a6238b24e2cbb6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newSprite: {fileID: 21300000, guid: 9351c88c78ad0204e8292a0def591037, type: 3}
+  fruitSpawnPos: {fileID: 2552055863423827720}
+  fallPos: {fileID: 8213219009904495630}
+  WoodPrefab: {fileID: 3121230369053445424, guid: a74bba1b82e13c848a821fae31994895, type: 3}
+  fruitPrefab: {fileID: 3121230369053445424, guid: ada5a770af6cb3f479bfcf6bb46a5fc2, type: 3}
+  hitCount: 0
+  isFruitTree: 1

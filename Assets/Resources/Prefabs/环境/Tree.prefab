@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 8449633265990673209}
   - component: {fileID: 2582392593380029667}
   - component: {fileID: 4840876969424185283}
-  - component: {fileID: 3794192898602968845}
   - component: {fileID: 642183198792375062}
   - component: {fileID: 1452759856238534622}
+  - component: {fileID: 7910800232385034373}
   m_Layer: 6
   m_Name: Tree
   m_TagString: Tree
@@ -133,25 +133,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.8029952, y: 2.0495281}
   m_EdgeRadius: 0
---- !u!114 &3794192898602968845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1912208371749903894}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1e2a4b9acfdca142b5c53a93815c541, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  newSprite: {fileID: 0}
-  fruitSpawnPos: {fileID: 0}
-  fallPos: {fileID: 0}
-  WoodPrefab: {fileID: 3121230369053445424, guid: a74bba1b82e13c848a821fae31994895, type: 3}
-  fruitPrefab: {fileID: 0}
-  hitCount: 0
-  isFruitTree: 0
 --- !u!95 &642183198792375062
 Animator:
   serializedVersion: 5
@@ -218,3 +199,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 12.183741, y: 16.70249}
   m_EdgeRadius: 0
+--- !u!114 &7910800232385034373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912208371749903894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77b9b1c50f4550742a6238b24e2cbb6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newSprite: {fileID: 21300000, guid: ed33c201cd8f2c7479a881b3dda05227, type: 3}
+  fruitSpawnPos: {fileID: 0}
+  fallPos: {fileID: 0}
+  WoodPrefab: {fileID: 3121230369053445424, guid: a74bba1b82e13c848a821fae31994895, type: 3}
+  fruitPrefab: {fileID: 0}
+  hitCount: 0
+  isFruitTree: 0

@@ -129,7 +129,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 9bf77bb4a4519a24bab1c70d286c3ffc, type: 2}
   plantData: {fileID: 0}
-  shopItemData: {fileID: 0}
+  shopItemData: {fileID: 11400000, guid: c4a3a06a97ea4c743891e8588f9e4160, type: 2}
+  foodData: {fileID: 0}
   canInteract: 0
   isDropped: 0
   droppedCount: 0
@@ -191,3 +192,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 883675ec1d208e84f990356347d42b1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canCollect: 0

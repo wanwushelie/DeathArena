@@ -17,28 +17,17 @@ MonoBehaviour:
     resultItem: {fileID: 11400000, guid: 0394b7287e73f7b4c8e002f6a7398447, type: 2}
     resultAmount: 1
     requirements:
-    - requiredItem: {fileID: 11400000, guid: 0c511d0e92554e54db84df7b32dc5855, type: 2}
+    - requiredItem: {fileID: 11400000, guid: 675220797da3b5b4693a434a2083a010, type: 2}
+      amount: 2
+    - requiredItem: {fileID: 11400000, guid: bfe304a526b375042b29855b9a5ccf41, type: 2}
       amount: 2
     isUnlocked: 1
-  - recipeID: "\u5200\u5177"
-    resultItem: {fileID: 11400000, guid: 0394b7287e73f7b4c8e002f6a7398447, type: 2}
+  - recipeID: "\u9504\u5934"
+    resultItem: {fileID: 11400000, guid: 9c0a24ce253183444a8e9f78f74d3adf, type: 2}
     resultAmount: 1
     requirements:
-    - requiredItem: {fileID: 11400000, guid: 90441768392fd5243b63f85f0acf9679, type: 2}
+    - requiredItem: {fileID: 11400000, guid: 675220797da3b5b4693a434a2083a010, type: 2}
       amount: 2
-    - requiredItem: {fileID: 11400000, guid: 0c511d0e92554e54db84df7b32dc5855, type: 2}
-      amount: 2
-    - requiredItem: {fileID: 11400000, guid: 9c0a24ce253183444a8e9f78f74d3adf, type: 2}
-      amount: 2
-    isUnlocked: 1
-  - recipeID: "\u5200\u5177"
-    resultItem: {fileID: 11400000, guid: 0394b7287e73f7b4c8e002f6a7398447, type: 2}
-    resultAmount: 1
-    requirements:
-    - requiredItem: {fileID: 11400000, guid: 90441768392fd5243b63f85f0acf9679, type: 2}
-      amount: 2
-    - requiredItem: {fileID: 11400000, guid: 0c511d0e92554e54db84df7b32dc5855, type: 2}
-      amount: 2
-    - requiredItem: {fileID: 11400000, guid: 9c0a24ce253183444a8e9f78f74d3adf, type: 2}
+    - requiredItem: {fileID: 11400000, guid: bfe304a526b375042b29855b9a5ccf41, type: 2}
       amount: 2
     isUnlocked: 1

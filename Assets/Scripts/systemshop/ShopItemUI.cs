@@ -26,7 +26,7 @@ public class ShopItemUI : MonoBehaviour
             itemNameText.text = item.itemData.itemName;
         }
 
-        // 为预制体添加点击事件
+        //  为预制体添加点击事件
         GetComponent<Button>().onClick.AddListener(() =>
         {
             clickableShop.UpdateSelectedItem(item);
