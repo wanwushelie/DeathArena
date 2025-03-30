@@ -97,6 +97,7 @@ public class ClickableShop : MonoBehaviour
             Destroy(child.gameObject);
         }
         Debug.Log($"Total items: {itemManager.items.Length}");  // Changed from .Count to .Length
+        if (itemManager == null || itemManager.items == null) return; // 防止空引用
         // 动态生成商品项
         foreach (Item item in itemManager.items)
         {

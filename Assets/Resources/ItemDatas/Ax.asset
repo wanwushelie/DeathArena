@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ax
   m_EditorClassIdentifier: 
   itemName: Axe
-  icon: {fileID: -742294562, guid: 03648fe178bac684b8a40092447acfde, type: 3}
+  icon: {fileID: 21300000, guid: 88c7090be7d852b47ac636dcfd7be935, type: 3}
   price: 19
   maxAllowed: 99
   isSellable: 0
