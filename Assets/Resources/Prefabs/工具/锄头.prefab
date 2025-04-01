@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8410825018154384389}
   - component: {fileID: 5954392074884993970}
   - component: {fileID: 7091612460525666537}
-  - component: {fileID: 5309552800762530160}
   - component: {fileID: 8808880005154821895}
   m_Layer: 0
   m_Name: "\u9504\u5934"
@@ -77,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -1878461214, guid: 03648fe178bac684b8a40092447acfde, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8d2dda724fdfcff409a3f335ffd250da, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -151,7 +150,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8125, y: 0.9375}
+    oldSize: {x: 25, y: 25}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -160,18 +159,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8125, y: 0.9375}
   m_EdgeRadius: 0
---- !u!114 &5309552800762530160
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5032137966722292635}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 883675ec1d208e84f990356347d42b1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8808880005154821895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,5 +173,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 9c0a24ce253183444a8e9f78f74d3adf, type: 2}
   plantData: {fileID: 0}
-  canInteract: 0
+  shopItemData: {fileID: 0}
+  foodData: {fileID: 0}
+  canInteract: 1
+  isDropped: 0
+  droppedCount: 0
   rigid: {fileID: 0}

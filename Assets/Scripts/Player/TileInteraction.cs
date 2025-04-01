@@ -13,6 +13,11 @@ public class TileInteraction : MonoBehaviour
     [Header("栅栏工具设置")]
     public Tilemap targetTilemap;  // 要绘制RuleTile的目标Tilemap层
     public RuleTile ruleTile;      // 要绘制的RuleTile资源
+    [Header("水渠工具设置")]
+    public ClickToDrawRuleTile waterFlowManager; // 新增对水流管理脚本的引用
+    public Tilemap canalTilemap;  // 水渠Tilemap层
+    public RuleTile wateredTile; // 水渠RuleTile
+    public TileBase dryTile; // 干涸的水渠瓦片
 
     /// <summary>
     /// 初始化TileInteraction类的实例。
@@ -62,6 +67,32 @@ public class TileInteraction : MonoBehaviour
                     if (!targetTilemap.HasTile(targetPosition))
                     {
                         targetTilemap.SetTile(targetPosition, ruleTile);
+                    }
+                    return;
+                }
+
+                // 新增水渠工具处理
+                if (player.inventoryManager.toolbar.selectedSlot.itemName == "铲子")
+                {
+                    if (!canalTilemap.HasTile(targetPosition))
+                    {
+                        canalTilemap.SetTile(targetPosition, dryTile);
+                        player.anim.SetTrigger("isHoeing"); // 使用耕地动画
+                        SoundManager.Instance.Play("EFFECT/Plow", SoundType.EFFECT);
+                        waterFlowManager.UpdateWaterFlow(); // 新增水流更新
+                    }
+                    return;
+                }
+
+                // 新增泥土工具处理
+                if (player.inventoryManager.toolbar.selectedSlot.itemName == "泥土")
+                {
+                    if (canalTilemap.GetTile(targetPosition) == wateredTile)
+                    {
+                        canalTilemap.SetTile(targetPosition, dryTile);
+                        player.anim.SetTrigger("isPicking"); // 使用浇水动画
+                        SoundManager.Instance.Play("EFFECT/Watering", SoundType.EFFECT);
+                        waterFlowManager.UpdateWaterFlow(); // 新增水流更新
                     }
                     return;
                 }
@@ -140,7 +171,7 @@ public class TileInteraction : MonoBehaviour
     /// <param name="tileState">瓦片状态。</param>
     private void HandleHoeing(string tileName, string tileState)
     {
-        if (player.inventoryManager.toolbar.selectedSlot.itemName == "Hoe") // 检查玩家选中的物品是否为锄头
+        if (player.inventoryManager.toolbar.selectedSlot.itemName == "锄头") // 检查玩家选中的物品是否为锄头
         {
             if (tileName == "InteractableTile") // 检查目标瓦片是否为可交互瓦片
             {
@@ -183,7 +214,7 @@ public class TileInteraction : MonoBehaviour
     {
         if (tileName != "栅栏") // 检查目标瓦片是否为栅栏瓦片
         {
-            if (player.inventoryManager.toolbar.selectedSlot.itemName == "Watering")
+            if (player.inventoryManager.toolbar.selectedSlot.itemName == "斧头")
             {
                 if (targetTilemap.HasTile(targetPosition))
                 {
@@ -201,9 +232,9 @@ public class TileInteraction : MonoBehaviour
     /// <param name="tileName">瓦片名称。</param>
     private void HandleWatering(string tileName)
     {
-        if (tileName == "PlowedTile") // 检查目标瓦片是否为已耕地瓦片
+        if (tileName == "土地") // 检查目标瓦片是否为已耕地瓦片
         {
-            if (player.inventoryManager.toolbar.selectedSlot.itemName == "Watering") // 检查玩家选中的物品是否为浇水工具
+            if (player.inventoryManager.toolbar.selectedSlot.itemName == "水壶") // 检查玩家选中的物品是否为浇水工具
             {
                 stateManager.IsWatering = true; // 设置浇水状态为true
                 player.anim.SetTrigger("isWatering"); // 触发玩家的浇水动画

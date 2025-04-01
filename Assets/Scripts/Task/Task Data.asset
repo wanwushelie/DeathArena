@@ -14,18 +14,66 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tasks:
   - taskName: "\u4EFB\u52A1\u4E00"
-    taskDescription: "\u8FD9\u662F\u4EFB\u52A1\u4E00\u7684\u63CF\u8FF0"
+    taskDescription: "\u9700\u8981\u591A\u5C11\u4E1C\u897F\uFF0C\u5956\u52B1\u66F2\u8F95\u7281"
     requirements:
     - requiredItem: {fileID: 11400000, guid: 675220797da3b5b4693a434a2083a010, type: 2}
       amount: 1
-    rewardItem: {fileID: 11400000, guid: 0394b7287e73f7b4c8e002f6a7398447, type: 2}
+    rewardItem: {fileID: 11400000, guid: 9bf77bb4a4519a24bab1c70d286c3ffc, type: 2}
     rewardAmount: 1
-    isCompleted: 1
+    isCompleted: 0
   - taskName: "\u4EFB\u52A1\u4E8C"
-    taskDescription: "\u4EFB\u52A1\u4E8C"
+    taskDescription: "\u9700\u8981\u591A\u5C11\u4E1C\u897F\uFF0C\u5956\u52B1\u65E5\u6677"
     requirements:
     - requiredItem: {fileID: 11400000, guid: ab49600bd8e26dc4390dfe334bd1e875, type: 2}
       amount: 1
-    rewardItem: {fileID: 11400000, guid: 675220797da3b5b4693a434a2083a010, type: 2}
+    rewardItem: {fileID: 11400000, guid: 8437d50683c8b28498223a432767b8d3, type: 2}
+    rewardAmount: 1
+    isCompleted: 0
+  - taskName: "\u4EFB\u52A1\u4E09"
+    taskDescription: "\u9700\u8981\u591A\u5C11\u4E1C\u897F\uFF0C\u5956\u52B1\u51B0\u5757"
+    requirements:
+    - requiredItem: {fileID: 11400000, guid: ab49600bd8e26dc4390dfe334bd1e875, type: 2}
+      amount: 1
+    rewardItem: {fileID: 11400000, guid: 3f83e7dd67966d0468212e83770575d9, type: 2}
+    rewardAmount: 1
+    isCompleted: 0
+  - taskName: "\u4EFB\u52A1\u56DB"
+    taskDescription: "\u9700\u8981\u591A\u5C11\u4E1C\u897F\uFF0C\u5956\u52B1\u952F\u5B50"
+    requirements:
+    - requiredItem: {fileID: 11400000, guid: ab49600bd8e26dc4390dfe334bd1e875, type: 2}
+      amount: 1
+    rewardItem: {fileID: 11400000, guid: 9eb9484dcbf45cf4390317b58dd2014b, type: 2}
+    rewardAmount: 1
+    isCompleted: 0
+  - taskName: "\u4EFB\u52A1\u4E94"
+    taskDescription: "\u9700\u8981\u591A\u5C11\u4E1C\u897F\uFF0C\u5956\u52B1\u6C34\u8F66"
+    requirements:
+    - requiredItem: {fileID: 11400000, guid: ab49600bd8e26dc4390dfe334bd1e875, type: 2}
+      amount: 1
+    rewardItem: {fileID: 11400000, guid: 7673f4c782b0eff45935403881fcb72c, type: 2}
+    rewardAmount: 1
+    isCompleted: 0
+  - taskName: "\u4EFB\u52A1\u516D"
+    taskDescription: "\u9700\u8981\u591A\u5C11\u4E1C\u897F\uFF0C\u5956\u52B1\u6749\u9570"
+    requirements:
+    - requiredItem: {fileID: 11400000, guid: ab49600bd8e26dc4390dfe334bd1e875, type: 2}
+      amount: 1
+    rewardItem: {fileID: 11400000, guid: dadbf2e3bcbee7146b7e0e510b605bdd, type: 2}
+    rewardAmount: 1
+    isCompleted: 0
+  - taskName: "\u4EFB\u52A1\u4E03"
+    taskDescription: "\u9700\u8981\u591A\u5C11\u4E1C\u897F\uFF0C\u5956\u52B1\u706B\u6298\u5B50"
+    requirements:
+    - requiredItem: {fileID: 11400000, guid: ab49600bd8e26dc4390dfe334bd1e875, type: 2}
+      amount: 1
+    rewardItem: {fileID: 11400000, guid: 6480b81984ebb344e933268cc25e58e0, type: 2}
+    rewardAmount: 1
+    isCompleted: 0
+  - taskName: "\u4EFB\u52A1\u516B"
+    taskDescription: "\u9700\u8981\u591A\u5C11\u4E1C\u897F\uFF0C\u5956\u52B1\u51B0\u7BB1"
+    requirements:
+    - requiredItem: {fileID: 11400000, guid: ab49600bd8e26dc4390dfe334bd1e875, type: 2}
+      amount: 1
+    rewardItem: {fileID: 11400000, guid: a6a0cb20d34a70b45b34b0d54854e613, type: 2}
     rewardAmount: 1
     isCompleted: 0

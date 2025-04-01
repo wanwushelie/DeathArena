@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recipes:
   - recipeID: "\u65A7\u5934"
-    resultItem: {fileID: 11400000, guid: 0394b7287e73f7b4c8e002f6a7398447, type: 2}
+    resultItem: {fileID: 11400000, guid: b76b2a74188f59047b4a4ddab317c6b5, type: 2}
     resultAmount: 1
     requirements:
     - requiredItem: {fileID: 11400000, guid: 675220797da3b5b4693a434a2083a010, type: 2}
@@ -24,6 +24,51 @@ MonoBehaviour:
     isUnlocked: 1
   - recipeID: "\u9504\u5934"
     resultItem: {fileID: 11400000, guid: 9c0a24ce253183444a8e9f78f74d3adf, type: 2}
+    resultAmount: 1
+    requirements:
+    - requiredItem: {fileID: 11400000, guid: 675220797da3b5b4693a434a2083a010, type: 2}
+      amount: 2
+    - requiredItem: {fileID: 11400000, guid: bfe304a526b375042b29855b9a5ccf41, type: 2}
+      amount: 2
+    isUnlocked: 1
+  - recipeID: "\u9570\u5200"
+    resultItem: {fileID: 11400000, guid: b877bbd85571b1e4dbafd17e425a8513, type: 2}
+    resultAmount: 1
+    requirements:
+    - requiredItem: {fileID: 11400000, guid: 675220797da3b5b4693a434a2083a010, type: 2}
+      amount: 2
+    - requiredItem: {fileID: 11400000, guid: bfe304a526b375042b29855b9a5ccf41, type: 2}
+      amount: 2
+    isUnlocked: 1
+  - recipeID: "\u94F2\u5B50"
+    resultItem: {fileID: 11400000, guid: ca6b7d6ab4a9b0847867985425428fd8, type: 2}
+    resultAmount: 1
+    requirements:
+    - requiredItem: {fileID: 11400000, guid: 675220797da3b5b4693a434a2083a010, type: 2}
+      amount: 2
+    - requiredItem: {fileID: 11400000, guid: bfe304a526b375042b29855b9a5ccf41, type: 2}
+      amount: 2
+    isUnlocked: 1
+  - recipeID: "\u6C34\u58F6"
+    resultItem: {fileID: 11400000, guid: 2c807916a4261264db59cf4ecded70f2, type: 2}
+    resultAmount: 1
+    requirements:
+    - requiredItem: {fileID: 11400000, guid: 675220797da3b5b4693a434a2083a010, type: 2}
+      amount: 2
+    - requiredItem: {fileID: 11400000, guid: bfe304a526b375042b29855b9a5ccf41, type: 2}
+      amount: 2
+    isUnlocked: 1
+  - recipeID: "\u5B9D\u7BB1"
+    resultItem: {fileID: 11400000, guid: 41fcf8b0ef563474a99bd3a08fd12f79, type: 2}
+    resultAmount: 1
+    requirements:
+    - requiredItem: {fileID: 11400000, guid: 675220797da3b5b4693a434a2083a010, type: 2}
+      amount: 2
+    - requiredItem: {fileID: 11400000, guid: bfe304a526b375042b29855b9a5ccf41, type: 2}
+      amount: 2
+    isUnlocked: 1
+  - recipeID: "\u6805\u680F"
+    resultItem: {fileID: 11400000, guid: ac64e6d93c8309a489a4639b4911c444, type: 2}
     resultAmount: 1
     requirements:
     - requiredItem: {fileID: 11400000, guid: 675220797da3b5b4693a434a2083a010, type: 2}

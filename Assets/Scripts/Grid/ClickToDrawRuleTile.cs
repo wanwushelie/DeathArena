@@ -10,7 +10,7 @@ public class ClickToDrawRuleTile : MonoBehaviour
     public Tilemap riverTilemap;  // 引用河流Tilemap组件
 
     [Header("Tile Assets")]
-    public RuleTile ruleTile;     // 引用RuleTile资源（水渠瓦片）
+    // public RuleTile ruleTile;     // 引用RuleTile资源（水渠瓦片）
     public TileBase wateredTile;  // 带水的水渠瓦片
     public TileBase dryTile;      // 干涸的水渠瓦片
 
@@ -21,37 +21,37 @@ public class ClickToDrawRuleTile : MonoBehaviour
         new Vector3Int(-1, 0, 0)   // 左
     };
 
-    void Update()
-    {
-        // 检测鼠标左键点击
-        if (Input.GetMouseButtonDown(0))
-        {
-            // 获取鼠标点击的世界坐标
-            Vector3 mousePosition = Input.mousePosition;
-            // Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-            Vector3 worldMousePosition = UnityEngine.Camera.main.ScreenToWorldPoint(mousePosition);
-            worldMousePosition.z = 0;
+    // void Update()
+    // {
+    //     // 检测鼠标左键点击
+    //     if (Input.GetMouseButtonDown(0))
+    //     {
+    //         // 获取鼠标点击的世界坐标
+    //         Vector3 mousePosition = Input.mousePosition;
+    //         // Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+    //         Vector3 worldMousePosition = UnityEngine.Camera.main.ScreenToWorldPoint(mousePosition);
+    //         worldMousePosition.z = 0;
 
-            // 将世界坐标转换为Tilemap的单元格坐标
-            Vector3Int targetPosition = tilemap.WorldToCell(worldMousePosition);
+    //         // 将世界坐标转换为Tilemap的单元格坐标
+    //         Vector3Int targetPosition = tilemap.WorldToCell(worldMousePosition);
 
-            // 在指定位置绘制RuleTile（水渠瓦片）
-            if (!tilemap.HasTile(targetPosition))
-            {
-                tilemap.SetTile(targetPosition, ruleTile);
-            }
-            else
-            {
-                tilemap.SetTile(targetPosition, null); // 如果已经存在瓦片，则清除
-            }
+    //         // 在指定位置绘制RuleTile（水渠瓦片）
+    //         if (!tilemap.HasTile(targetPosition))
+    //         {
+    //             tilemap.SetTile(targetPosition, ruleTile);
+    //         }
+    //         else
+    //         {
+    //             tilemap.SetTile(targetPosition, null); // 如果已经存在瓦片，则清除
+    //         }
 
-            // 更新水渠连通性
-            UpdateWaterFlow();
-        }
-    }
+    //         // 更新水渠连通性
+    //         UpdateWaterFlow();
+    //     }
+    // }
 
     // 更新水渠连通性
-    private void UpdateWaterFlow()
+    public void UpdateWaterFlow()
     {
         HashSet<Vector3Int> wateredPositions = GetConnectedWaterTiles();
         UpdateTilemap(wateredPositions);

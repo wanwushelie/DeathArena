@@ -43,6 +43,16 @@ public class InventoryBase : MonoBehaviour
         }
     }
 
+    public void DropItem(Item item, int itemCount)
+    {
+        Vector3 spawnLocation = Player.Instance.transform.position;
+        Vector3 spawnOffset = Random.insideUnitCircle * 1.25f;
+
+        Item droppedItem = Instantiate(item, spawnLocation + spawnOffset, Quaternion.identity);
+        droppedItem.SetDroppedItemCount(itemCount);
+        // droppedItem.rigid.AddForce(spawnOffset * 0.3f, ForceMode2D.Impulse);
+    }
+
     public void Remove()
     {
         if (inventory == null || InGameUI.instance.draggedSlot == null) return;
@@ -56,7 +66,8 @@ public class InventoryBase : MonoBehaviour
         if (itemToDrop != null)
         {
             // 1. 保存掉落物品的数量并将其掉落
-            Player.Instance.DropItem(itemToDrop, slotData.currentCount);
+            // Player.Instance.DropItem(itemToDrop, slotData.currentCount);
+            DropItem(itemToDrop, slotData.currentCount);
             // 2. 从库存中删除该槽位的物品
             inventory.Remove(slotID, true);
         }
@@ -130,4 +141,5 @@ public class InventoryBase : MonoBehaviour
             slot.inventory = inventory;
         }
     }
+
 }

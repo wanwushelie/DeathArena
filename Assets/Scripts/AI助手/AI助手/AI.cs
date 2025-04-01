@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class AI : MonoBehaviour
 {
@@ -16,19 +16,35 @@ public class AI : MonoBehaviour
     [SerializeField] private ScrollRect m_ScroTectObject;
     // 回复的聊天气泡
     [SerializeField] private ChatPrefab m_RobotChatPrefab;
+    // 发送按钮
+    [SerializeField] private Button m_SendButton;
 
     // HttpRequestExample 脚本的引用
     private HttpRequestExample m_HttpRequestExample;
+    private bool isProcessing = false; // 表示是否正在处理请求
+    private Coroutine currentCoroutine; // 存储当前正在运行的协程
 
     void Awake()
     {
         // 获取 HttpRequestExample 脚本的引用
         m_HttpRequestExample = GetComponent<HttpRequestExample>();
+        // 初始化按钮状态
+        UpdateButtonState();
+        m_SendButton.onClick.AddListener(SendData);
     }
 
     // 发送信息
     public void SendData()
     {
+        if (isProcessing)
+        {
+            // 如果正在处理，取消请求
+            StopCoroutine(currentCoroutine);
+            isProcessing = false;
+            UpdateButtonState();
+            return;
+        }
+
         if (string.IsNullOrEmpty(m_InputWord.text))
             return;
 
@@ -38,9 +54,13 @@ public class AI : MonoBehaviour
         // 重新计算容器尺寸
         LayoutRebuilder.ForceRebuildLayoutImmediate(m_rootTrans);
         StartCoroutine(TurnToLastLine());
-        // 发送请求并处理响应
-        m_HttpRequestExample.SendRequest(_msg, CallBack);
+
+        // 开始请求
+        isProcessing = true;
+        UpdateButtonState();
+        currentCoroutine = m_HttpRequestExample.SendRequest(_msg, CallBack);
         m_InputWord.text = "";
+        // StartCoroutine(currentCoroutine);
     }
 
     // 回调函数，处理API响应
@@ -54,6 +74,10 @@ public class AI : MonoBehaviour
             LayoutRebuilder.ForceRebuildLayoutImmediate(m_rootTrans);
             StartCoroutine(TurnToLastLine());
         }
+
+        // 请求完成，更新按钮状态
+        isProcessing = false;
+        UpdateButtonState();
     }
 
     // 滚动到最新消息
@@ -63,5 +87,17 @@ public class AI : MonoBehaviour
         // 滚动到最近的消息
         m_ScroTectObject.verticalNormalizedPosition = 0;
     }
-}
 
+    // 更新按钮状态
+    private void UpdateButtonState()
+    {
+        if (m_SendButton != null)
+        {
+            Text buttonText = m_SendButton.GetComponentInChildren<Text>();
+            if (buttonText != null)
+            {
+                buttonText.text = isProcessing ? "停止" : "发送";
+            }
+        }
+    }
+}

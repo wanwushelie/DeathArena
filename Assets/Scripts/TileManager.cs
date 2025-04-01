@@ -17,7 +17,7 @@ public class TileManager : MonoBehaviour
     // 隐藏的可交互瓦片
     public Tile hiddenInteractableTile;
     // 已交互的瓦片
-    public Tile interactedTile;
+    public TileBase interactedTile;
     // 已种植的瓦片
     public Tile plantedTile;
 

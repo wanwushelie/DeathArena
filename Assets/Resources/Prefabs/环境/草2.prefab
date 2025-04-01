@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 5957337988383556557}
   - component: {fileID: 616159103848408909}
   - component: {fileID: 693802677945950094}
-  - component: {fileID: 8325064520456349857}
   m_Layer: 0
   m_Name: "\u83492"
   m_TagString: Untagged
@@ -180,16 +179,3 @@ MonoBehaviour:
   isDropped: 0
   droppedCount: 0
   rigid: {fileID: 0}
---- !u!114 &8325064520456349857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3121230369053445424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 883675ec1d208e84f990356347d42b1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canCollect: 0

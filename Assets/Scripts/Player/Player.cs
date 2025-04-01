@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     private MiningInteraction miningInteraction;
     private ItemPickup itemPickup;
 
-    public float stamina = 100f; // 当前精力值
+    public float stamina = 100f; //  当前精力值
     public float maxStamina = 100f; // 最大精力值
     public float staminaRecoveryRate = 5f; // 精力恢复速率（每秒恢复的量）
     public float health = 100f; // 当前血量
@@ -232,15 +232,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void DropItem(Item item, int itemCount)
-    {
-        Vector3 spawnLocation = transform.position;
-        Vector3 spawnOffset = Random.insideUnitCircle * 1.25f;
-
-        Item droppedItem = Instantiate(item, spawnLocation + spawnOffset, Quaternion.identity);
-        droppedItem.SetDroppedItemCount(itemCount);
-        droppedItem.rigid.AddForce(spawnOffset * 0.3f, ForceMode2D.Impulse);
-    }
 
     public void SetPosition()
     {

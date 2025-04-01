@@ -29,7 +29,7 @@ public class TreeChopping : MonoBehaviour
             Tree tree = rayHit.collider.GetComponent<Tree>();
             if (tree != null)
             {
-                if (player.inventoryManager.toolbar.selectedSlot != null && player.inventoryManager.toolbar.selectedSlot.itemName == "Axe")
+                if (player.inventoryManager.toolbar.selectedSlot != null && player.inventoryManager.toolbar.selectedSlot.itemName == "斧头")
                 {
                     if (Input.GetMouseButtonDown(0))
                     {

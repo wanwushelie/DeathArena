@@ -10,9 +10,10 @@ public class HttpRequestExample : MonoBehaviour
     private string apiKey = "a1f4615270a8e363ec8ab7eb735f108b.2p9I0mFwPXzsuT6E";  // 替换为你的 API 密钥
 
     // 公共方法，用于发送请求
-    public void SendRequest(string message, System.Action<string> callback)
+    public Coroutine SendRequest(string message, System.Action<string> callback)
     {
-        StartCoroutine(SendRequestCoroutine(message, callback));
+        // StartCoroutine(SendRequestCoroutine(message, callback));
+        return StartCoroutine(SendRequestCoroutine(message, callback));
     }
 
     private IEnumerator SendRequestCoroutine(string message, System.Action<string> callback)
@@ -40,6 +41,13 @@ public class HttpRequestExample : MonoBehaviour
 
             // 发送请求并等待响应
             yield return request.SendWebRequest();
+
+            // 如果请求被取消，直接返回
+            if (request.isHttpError || request.isNetworkError)
+            {
+                callback(request.error);
+                yield break;
+            }
 
             // 处理请求结果
             if (request.result == UnityWebRequest.Result.Success)
