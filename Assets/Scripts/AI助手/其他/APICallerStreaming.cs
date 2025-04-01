@@ -8,12 +8,19 @@ public class APICaller : MonoBehaviour
     private string apiKey = "sk-9bc69ef7b0e444838ffddff1d1323371";
     private string url = "https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation";
 
-    void Start()
+    // void Start()
+    // {
+    //     StartCoroutine(MakeRequest());
+    // }
+
+    // 添加一个公共方法用于发起请求
+    public void MakeRequest(string inputText)
     {
-        StartCoroutine(MakeRequest());
+        StartCoroutine(SendRequest(inputText));
     }
 
-    IEnumerator MakeRequest()
+    // IEnumerator MakeRequest()
+    IEnumerator SendRequest(string inputText)
     {
         // 构建请求体
         string jsonBody = JsonUtility.ToJson(new RequestData
@@ -24,7 +31,8 @@ public class APICaller : MonoBehaviour
                 messages = new Message[]
                 {
                     new Message { role = "system", content = "You are a helpful assistant." },
-                    new Message { role = "user", content = "你好，哪个公园距离我最近？" }
+                    // new Message { role = "user", content = "你好，哪个公园距离我最近？" }
+                    new Message { role = "user", content = inputText } // 使用传入的文本
                 }
             },
             parameters = new ParametersData
