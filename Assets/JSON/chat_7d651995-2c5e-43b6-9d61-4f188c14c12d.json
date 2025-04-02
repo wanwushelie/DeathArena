@@ -1,0 +1,1 @@
+{"sessionId":"7d651995-2c5e-43b6-9d61-4f188c14c12d","messages":[{"role":"user","content":"1+1=2对吗","review":""},{"role":"assistant","content":"是的，1+1=2 是正确的。这是基本的算术运算，表示两个数相加的结果。在数学中，这是一个普遍接受的事实。","review":"没有错误。"}],"knowledgePoints":"- **知识点**：1+1=2 是基本算术运算的结果。\n- **意义**：表示两个数相加等于二。\n- **正确性**：在数学中是普遍成立的事实。","isCardGenerated":true}

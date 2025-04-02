@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using System.IO;
 using System.Linq;
-using System; // 添加这行以使用DateTime类
+using System;
 
 public class AI : MonoBehaviour
 {
@@ -30,19 +30,25 @@ public class AI : MonoBehaviour
         chatHistoryManager = GetComponent<ChatHistoryManager>();
         chatUIManager = GetComponent<ChatUIManager>();
         m_ApiCaller = GetComponent<APICaller>();
-      
+
         // 初始化按钮状态
         chatUIManager.UpdateButtonState(false);
         chatUIManager.m_SendButton.onClick.AddListener(SendData);
         m_NewChatButton.onClick.AddListener(CreateNewChat);
-      
+
         // 加载所有聊天记录会话
         chatHistoryManager.LoadAllChatSessions();
-      
+
         // 加载最新对话
         LoadLatestChat();
         // 加载聊天记录按钮
-        chatUIManager.LoadChatRecordsButtons(chatHistoryManager.chatSessions);
+        // chatUIManager.LoadChatRecordsButtons(chatHistoryManager.chatSessions);
+        chatUIManager.LoadChatRecordsButtons(
+            chatHistoryManager.chatSessions,
+            OnChatRecordButtonClicked // 直接传入回调方法
+        );
+        // 在Awake方法末尾添加
+        chatUIManager.LoadKnowledgeCards(chatHistoryManager.chatSessions);
     }
 
     // 发送信息
@@ -69,7 +75,6 @@ public class AI : MonoBehaviour
         // 开始请求
         chatUIManager.UpdateButtonState(true);
         currentCoroutine = m_HttpRequestExample.SendRequest(_msg, CallBack);
-        // currentCoroutine = StartCoroutine(m_HttpRequestExample.SendRequest(_msg, CallBack));
         m_InputWord.text = "";
     }
 
@@ -78,8 +83,8 @@ public class AI : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(_callback))
         {
-            chatUIManager.ShowAIReply(_callback, "");// 显示AI回复,审查内容为空
-          
+            chatUIManager.ShowAIReply(_callback, "");
+
             // 保存AI回复到历史记录
             chatHistory.Add(new ChatHistoryManager.ChatMessage("assistant", _callback));
             SaveChatHistory();
@@ -98,11 +103,6 @@ public class AI : MonoBehaviour
             Debug.Log("分析请求: " + analysisRequest);
 
             // 发送分析请求
-            // StartCoroutine(m_HttpRequestExample.SendRequest(analysisRequest, AnalysisCallback));
-            // m_HttpRequestExample.SendRequest(analysisRequest, AnalysisCallback);
-            // 使用 APICaller 发送分析请求
-            // m_ApiCaller.MakeRequest(analysisRequest);
-            // 使用 APICaller 发送分析请求，并处理回调
             m_ApiCaller.MakeRequest(analysisRequest, (analysisResult) =>
             {
                 // 更新最新的 AI 回复的review字段
@@ -136,15 +136,21 @@ public class AI : MonoBehaviour
     {
         // 清除当前聊天显示
         chatUIManager.ClearChatDisplay();
-      
+
         // 生成新对话ID
         currentChatId = Guid.NewGuid().ToString();
         chatHistory = new List<ChatHistoryManager.ChatMessage>();
-      
+
         // 保存新对话
         SaveChatHistory();
         // 重新加载聊天记录按钮
-        chatUIManager.LoadChatRecordsButtons(chatHistoryManager.chatSessions);
+        // chatUIManager.LoadChatRecordsButtons(chatHistoryManager.chatSessions);
+        chatUIManager.LoadChatRecordsButtons(
+            chatHistoryManager.chatSessions,
+            OnChatRecordButtonClicked // 直接传入回调方法
+        );
+        // 调用知识点总结
+        GetComponent<KnowledgeSummary>().OnChatSwitched(currentChatId);
     }
 
     // 加载最新对话
@@ -178,11 +184,11 @@ public class AI : MonoBehaviour
             CreateNewChat();
             return;
         }
-      
+
         var latestSession = chatHistoryManager.chatSessions.Values.OrderByDescending(s => s.lastModified).First();
         currentChatId = latestSession.sessionId;
         chatHistory = latestSession.messages;
-      
+
         // 显示消息
         foreach (var message in chatHistory)
         {
@@ -206,7 +212,7 @@ public class AI : MonoBehaviour
             lastModified = DateTime.Now,
             messages = chatHistory
         };
-      
+
         chatHistoryManager.SaveChatSession(wrapper);
         chatHistoryManager.SaveActiveChatId(currentChatId);
     }
@@ -237,10 +243,14 @@ public class AI : MonoBehaviour
 
             // 保存当前活跃聊天ID
             chatHistoryManager.SaveActiveChatId(currentChatId);
+            // 调用知识点总结
+            GetComponent<KnowledgeSummary>().OnChatSwitched(chatId);
         }
         else
         {
             Debug.LogError($"未找到聊天记录ID: {chatId}");
         }
+        // 在OnChatRecordButtonClicked方法末尾添加
+        chatUIManager.LoadKnowledgeCards(chatHistoryManager.chatSessions);
     }
 }

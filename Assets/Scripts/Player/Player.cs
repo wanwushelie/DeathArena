@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     public float maxHealth = 100f; // 最大血量
     public float satiation = 100f; // 当前饱腹值
     public float maxSatiation = 100f; // 最大饱腹值
-    public float satiationDecreaseRate = 1f; // 饱腹值减少速率（每秒减少的量）
+    public float satiationDecreaseRate = 0.1f; // 饱腹值减少速率（每秒减少的量）
 
     private void Awake()
     {

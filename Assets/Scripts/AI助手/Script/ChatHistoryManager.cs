@@ -28,6 +28,8 @@ public class ChatHistoryManager : MonoBehaviour
         public string sessionId;
         public DateTime lastModified;
         public List<ChatMessage> messages;
+        public string knowledgePoints; // 新增：知识点总结
+        public bool isCardGenerated = false;   // 新增：是否制卡
     }
 
     public Dictionary<string, ChatSessionWrapper> chatSessions = new Dictionary<string, ChatSessionWrapper>();

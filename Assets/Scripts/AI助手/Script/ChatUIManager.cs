@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Events; // 添加这行
 
 public class ChatUIManager : MonoBehaviour
 {
@@ -61,7 +62,8 @@ public class ChatUIManager : MonoBehaviour
     }
 
     // 加载聊天记录按钮
-    public void LoadChatRecordsButtons(Dictionary<string, ChatHistoryManager.ChatSessionWrapper> chatSessions)
+    public void LoadChatRecordsButtons(Dictionary<string, ChatHistoryManager.ChatSessionWrapper> chatSessions, 
+        UnityAction<string> onClick)
     {
         // 清除现有的按钮
         foreach (Transform child in m_ChatRecordsPanel.transform)
@@ -72,24 +74,19 @@ public class ChatUIManager : MonoBehaviour
         // 为每个聊天记录创建按钮
         foreach (var session in chatSessions.Values)
         {
-            // 获取聊天记录的第一句话
-            string firstMessage = "";
-            if (session.messages.Count > 0)
-            {
-                firstMessage = session.messages[0].content.Length > 20 
-                    ? session.messages[0].content.Substring(0, 20) + "..." 
-                    : session.messages[0].content;
-            }
-
-            // 创建按钮
             GameObject buttonObj = Instantiate(m_ChatRecordButtonPrefab, m_ChatRecordsPanel.transform);
-            ChatRecordButton button = buttonObj.GetComponent<ChatRecordButton>();
             Button uiButton = buttonObj.GetComponent<Button>();
-            uiButton.onClick.AddListener(button.OnClick);
             Text buttonText = buttonObj.GetComponentInChildren<Text>();
-
-            buttonText.text = firstMessage;
-            button.Setup(session.sessionId, OnChatRecordButtonClicked);
+            
+            // 直接绑定点击事件
+            uiButton.onClick.AddListener(() => onClick(session.sessionId));
+            
+            // 设置按钮文本
+            buttonText.text = session.messages.Count > 0 
+                ? (session.messages[0].content.Length > 20 
+                    ? session.messages[0].content.Substring(0, 20) + "..." 
+                    : session.messages[0].content)
+                : "新对话";
         }
     }
 
@@ -110,5 +107,30 @@ public class ChatUIManager : MonoBehaviour
         yield return new WaitForEndOfFrame();
         // 滚动到最近的消息
         m_ScroTectObject.verticalNormalizedPosition = 0;
+    }
+
+    // 添加新变量
+    [SerializeField] private GameObject m_KnowledgeCardPrefab;
+    [SerializeField] private Transform m_KnowledgeCardsPanel;
+    
+    // 添加新方法
+    public void LoadKnowledgeCards(Dictionary<string, ChatHistoryManager.ChatSessionWrapper> chatSessions)
+    {
+        // 清除现有卡片
+        foreach (Transform child in m_KnowledgeCardsPanel.transform)
+        {
+            Destroy(child.gameObject);
+        }
+    
+        // 为每个有知识点的对话创建卡片
+        foreach (var session in chatSessions.Values)
+        {
+            if (!string.IsNullOrEmpty(session.knowledgePoints) && session.isCardGenerated)
+            {
+                GameObject cardObj = Instantiate(m_KnowledgeCardPrefab, m_KnowledgeCardsPanel);
+                Text cardText = cardObj.GetComponentInChildren<Text>();
+                cardText.text = session.knowledgePoints;
+            }
+        }
     }
 }
