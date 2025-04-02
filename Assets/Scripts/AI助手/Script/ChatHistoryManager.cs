@@ -11,11 +11,13 @@ public class ChatHistoryManager : MonoBehaviour
     {
         public string role;
         public string content;
+        public string review; // 新增审查字段
 
-        public ChatMessage(string role, string content)
+        public ChatMessage(string role, string content, string review = "")
         {
             this.role = role;
             this.content = content;
+            this.review = review;
         }
     }
 

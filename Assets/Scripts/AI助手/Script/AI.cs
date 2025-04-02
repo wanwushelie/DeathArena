@@ -78,7 +78,7 @@ public class AI : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(_callback))
         {
-            chatUIManager.ShowAIReply(_callback);
+            chatUIManager.ShowAIReply(_callback, "");// 显示AI回复,审查内容为空
           
             // 保存AI回复到历史记录
             chatHistory.Add(new ChatHistoryManager.ChatMessage("assistant", _callback));
@@ -93,7 +93,7 @@ public class AI : MonoBehaviour
             Debug.Log("完整对话: " + fullConversation);
 
             // 添加提示词
-            string prompt = "分析这段对话，检查AI回答的内容是否有错误，如果没有就返回0，如果有就返回错误点个数，并指出哪里错误，正确应该是什么样，要求回答要精简准确";
+            string prompt = "分析这段对话，检查AI回答的内容是否有错误，如果没有就返回“没有错误”，如果有就返回错误点个数，并指出哪里错误，正确应该是什么样，要求回答要精简准确";
             string analysisRequest = $"{fullConversation}\n{prompt}";
             Debug.Log("分析请求: " + analysisRequest);
 
@@ -101,7 +101,25 @@ public class AI : MonoBehaviour
             // StartCoroutine(m_HttpRequestExample.SendRequest(analysisRequest, AnalysisCallback));
             // m_HttpRequestExample.SendRequest(analysisRequest, AnalysisCallback);
             // 使用 APICaller 发送分析请求
-            m_ApiCaller.MakeRequest(analysisRequest);
+            // m_ApiCaller.MakeRequest(analysisRequest);
+            // 使用 APICaller 发送分析请求，并处理回调
+            m_ApiCaller.MakeRequest(analysisRequest, (analysisResult) =>
+            {
+                // 更新最新的 AI 回复的review字段
+                chatHistory[chatHistory.Count - 1].review = analysisResult;
+                SaveChatHistory(); // 保存更新后的聊天记录
+                Debug.Log("分析结果: " + analysisResult);
+                // 获取最新的AI回复的聊天气泡
+                ChatPrefab aiChat = chatUIManager.m_rootTrans.transform.GetComponentsInChildren<ChatPrefab>()
+                    .Where(c => c.GetComponentInChildren<Text>().text == aiAnswer).Last();
+
+                // 如果找到气泡，更新审查文本
+                if (aiChat != null)
+                {
+                    aiChat.SetReviewText(analysisResult);
+                }
+            });
+
         }
 
         // 请求完成，更新按钮状态
@@ -148,7 +166,7 @@ public class AI : MonoBehaviour
                 }
                 else
                 {
-                    chatUIManager.ShowAIReply(message.content);
+                    chatUIManager.ShowAIReply(message.content, message.review);
                 }
             }
             return;
@@ -174,7 +192,7 @@ public class AI : MonoBehaviour
             }
             else
             {
-                chatUIManager.ShowAIReply(message.content);
+                chatUIManager.ShowAIReply(message.content, message.review);
             }
         }
     }
@@ -213,7 +231,7 @@ public class AI : MonoBehaviour
                 }
                 else
                 {
-                    chatUIManager.ShowAIReply(message.content);
+                    chatUIManager.ShowAIReply(message.content, message.review);
                 }
             }
 

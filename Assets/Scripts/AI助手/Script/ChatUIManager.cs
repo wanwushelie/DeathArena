@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class ChatUIManager : MonoBehaviour
 {
-    [SerializeField] private RectTransform m_rootTrans; // 聊天文本放置的层
+    [SerializeField] public RectTransform m_rootTrans; // 聊天文本放置的层
     [SerializeField] private ScrollRect m_ScroTectObject; // 滚动条
     [SerializeField] public Button m_SendButton; // 发送按钮
     [SerializeField] private ChatPrefab m_PostChatPrefab; // 发送聊天气泡
@@ -39,10 +39,13 @@ public class ChatUIManager : MonoBehaviour
     }
 
     // 显示AI回复
-    public void ShowAIReply(string reply)
+    public void ShowAIReply(string reply, string review)
     {
         ChatPrefab chat = Instantiate(m_RobotChatPrefab, m_rootTrans.transform);
         chat.SetText(reply);
+        chat.m_ReviewBubble.SetActive(false); // 初始化时隐藏审查气泡
+        chat.SetReviewText(review);
+        chat.SetupButton();
         LayoutRebuilder.ForceRebuildLayoutImmediate(m_rootTrans);
         StartCoroutine(TurnToLastLine());
     }
