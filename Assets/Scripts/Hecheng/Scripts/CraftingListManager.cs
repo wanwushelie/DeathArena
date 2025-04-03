@@ -45,16 +45,6 @@ public class CraftingListManager : MonoBehaviour
 
         if (isCraftingPanelOpen)
         {
-            // 移除时间缩放设置
-            if (InGameUI.instance != null)
-            {
-                InGameUI.instance.ToggleInventoryUI();
-            }
-            else
-            {
-                Debug.LogWarning("InGameUI instance is null!");
-            }
-
             // 刷新 RequirementItem 的 UI
             RefreshRequirementItems();
         }

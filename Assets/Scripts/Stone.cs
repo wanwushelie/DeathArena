@@ -52,7 +52,7 @@ public class Stone : MonoBehaviour
         
 
         SoundManager.Instance.Play("挖石头掉落的音效");
-        Destroy(gameObject, 1f);
+        Destroy(gameObject, 0.3f);
     }
 
     void OnTriggerEnter2D(Collider2D other)

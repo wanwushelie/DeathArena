@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf0e606deedc026408f7718caa2c5dbe, type: 3}
   m_Name: "\u6930\u5B50"
   m_EditorClassIdentifier: 
-  satiationRecovery: 1
-  healthRecovery: 1
+  satiationRecovery: 10
+  healthRecovery: 20

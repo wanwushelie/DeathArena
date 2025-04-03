@@ -37,7 +37,7 @@ public class PlantGrowthManager : MonoBehaviour
     public void PlantSeed(Vector3Int position, PlantData plantData)
     {
         // 检查该位置是否存在瓷砖且瓷砖名称为 "PlowedTile"
-        if (GameManager.instance.tileManager.DoesTileExist(position) && GameManager.instance.tileManager.GetTileName(position) == "PlowedTile")
+        if (GameManager.instance.tileManager.DoesTileExist(position) && GameManager.instance.tileManager.GetTileName(position) == "土地")
         {
             // 播放播种音效
             // SoundManager.Instance.Play("EFFECT/Seeded", SoundType.EFFECT);

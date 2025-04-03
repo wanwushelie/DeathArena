@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff688d6b06fa21f4f9ee4c8aea0d6c27, type: 3}
-  m_Name: Ax
+  m_Name: "\u9550\u5B50"
   m_EditorClassIdentifier: 
-  itemName: Axe
-  icon: {fileID: 21300000, guid: 88c7090be7d852b47ac636dcfd7be935, type: 3}
+  itemName: "\u9550\u5B50"
+  icon: {fileID: 21300000, guid: 15b2a9202f10f064fb951cd5df40f468, type: 3}
   price: 19
   maxAllowed: 99
   isSellable: 0

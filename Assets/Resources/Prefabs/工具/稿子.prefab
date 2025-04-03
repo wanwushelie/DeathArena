@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1078398829401342242}
   - component: {fileID: 104695600922789713}
   - component: {fileID: 1278057557845287575}
-  - component: {fileID: 5697862221806599996}
   - component: {fileID: 8663601979791512083}
   m_Layer: 0
   m_Name: "\u7A3F\u5B50"
@@ -31,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -160,18 +159,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8125, y: 0.9375}
   m_EdgeRadius: 0
---- !u!114 &5697862221806599996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2198946085193371028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 883675ec1d208e84f990356347d42b1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8663601979791512083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,7 +173,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 0394b7287e73f7b4c8e002f6a7398447, type: 2}
   plantData: {fileID: 0}
-  canInteract: 0
+  shopItemData: {fileID: 0}
+  foodData: {fileID: 0}
+  canInteract: 1
   isDropped: 0
   droppedCount: 0
   rigid: {fileID: 0}

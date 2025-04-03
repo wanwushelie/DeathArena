@@ -181,7 +181,10 @@ public class TileInteraction : MonoBehaviour
                 tileManager.SetInteracted(targetPosition); // 设置目标瓦片为已交互状态
                 StartCoroutine(ResetHoeingState()); // 启动协程，在0.2秒后重置耕地状态
             }
+        }
 
+        if (player.inventoryManager.toolbar.selectedSlot.itemName == "镰刀") // 检查玩家选中的物品是否为镰刀
+        {
             if (tileState == "Grown") // 检查目标瓦片是否为已生长状态
             {
                 tileManager.RemoveTile(targetPosition); // 移除目标瓦片
@@ -198,7 +201,7 @@ public class TileInteraction : MonoBehaviour
     /// <param name="tileName">瓦片名称。</param>
     private void HandlePlanting(string tileName)
     {
-        if (tileName == "PlowedTile") // 检查目标瓦片是否为已耕地瓦片
+        if (tileName == "土地") // 检查目标瓦片是否为已耕地瓦片
         {
             if (player.inventoryManager.toolbar.selectedSlot.itemName == "RiceSeed" || player.inventoryManager.toolbar.selectedSlot.itemName == "TomatoSeed") // 检查玩家选中的物品是否为种子
             {
@@ -267,7 +270,7 @@ public class TileInteraction : MonoBehaviour
     /// <returns></returns>
     private IEnumerator ResetHoeingState()
     {
-        yield return new WaitForSeconds(0.2f); // 等待0.2秒
+        yield return new WaitForSeconds(0.5f); // 从0.2秒增加到0.5秒
         stateManager.IsHoeing = false; // 重置耕地状态为false
     }
 

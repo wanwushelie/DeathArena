@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: "\u83493"
   m_EditorClassIdentifier: 
   itemName: "\u83493"
-  icon: {fileID: 21300000, guid: 5866839f298e29c4bab565b8826dfa9e, type: 3}
+  icon: {fileID: -13817353, guid: 5866839f298e29c4bab565b8826dfa9e, type: 3}
   price: 0
   maxAllowed: 99
   isSellable: 0
