@@ -12,8 +12,7 @@ GameObject:
   - component: {fileID: 2180671560293009310}
   - component: {fileID: 6536831308592179675}
   - component: {fileID: 1001874260929628736}
-  - component: {fileID: 7596696046649858313}
-  - component: {fileID: 1767441087838186580}
+  - component: {fileID: 8411344814774815603}
   m_Layer: 0
   m_Name: TomatoSeed
   m_TagString: Untagged
@@ -160,7 +159,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &7596696046649858313
+--- !u!114 &8411344814774815603
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,22 +168,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 3261522032523694300}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 883675ec1d208e84f990356347d42b1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1767441087838186580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3261522032523694300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee6bb4c47463d8247b046887abbcecff, type: 3}
+  m_Script: {fileID: 11500000, guid: 52cb46d6f0a5e3d4295c5346b20f24c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 8fc1a73ff1535ab4fa4412bddbe2eb4d, type: 2}
   plantData: {fileID: 11400000, guid: d5259e07fc180ac4f969b10d9be67d54, type: 2}
-  canInteract: 0
+  shopItemData: {fileID: 0}
+  foodData: {fileID: 0}
+  canInteract: 1
+  isDropped: 0
+  droppedCount: 0
   rigid: {fileID: 0}

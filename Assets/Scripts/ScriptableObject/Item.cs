@@ -5,7 +5,7 @@ public class Item : MonoBehaviour
 {
     public ItemData itemData;
     public PlantData plantData;
-    public ShopItemData shopItemData; // 新增：可选的商店数据
+    public ShopItemData shopItemData; //  新增：可选的商店数据
     public FoodData foodData;       // 食物数据
     public bool canInteract;
     public bool isDropped;

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // 物品管理
-//ItemManager.cs 是一个用于管理游戏内所有物品的类，主要负责将物品数据（Item 对象）进行集中管理，并提供快速检索功能。
+// ItemManager.cs 是一个用于管理游戏内所有物品的类，主要负责将物品数据（Item 对象）进行集中管理，并提供快速检索功能。
 
 public class ItemManager : MonoBehaviour
 {

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1342016558408670446}
   - component: {fileID: 8980008206741427699}
   - component: {fileID: 5763102337225412862}
-  - component: {fileID: 6975030879514230535}
   - component: {fileID: 6324485900466675690}
   m_Layer: 0
   m_Name: RiceSeed
@@ -160,18 +159,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7714522, y: 0.82719564}
   m_EdgeRadius: 0
---- !u!114 &6975030879514230535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2467313692846777651}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 883675ec1d208e84f990356347d42b1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6324485900466675690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,10 +168,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2467313692846777651}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee6bb4c47463d8247b046887abbcecff, type: 3}
+  m_Script: {fileID: 11500000, guid: 52cb46d6f0a5e3d4295c5346b20f24c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 946229b01853b7e48bfa8f6bdf7c4779, type: 2}
   plantData: {fileID: 11400000, guid: bcce14d1c97837a4d8e46b6322603de4, type: 2}
-  canInteract: 0
+  shopItemData: {fileID: 0}
+  foodData: {fileID: 0}
+  canInteract: 1
+  isDropped: 0
+  droppedCount: 0
   rigid: {fileID: 0}

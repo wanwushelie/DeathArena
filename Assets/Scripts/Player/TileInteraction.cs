@@ -271,7 +271,7 @@ public class TileInteraction : MonoBehaviour
     private IEnumerator ResetHoeingState()
     {
         yield return new WaitForSeconds(0.5f); // 从0.2秒增加到0.5秒
-        stateManager.IsHoeing = false; // 重置耕地状态为false
+         stateManager.IsHoeing = false; // 重置耕地状态为false
     }
 
     /// <summary>

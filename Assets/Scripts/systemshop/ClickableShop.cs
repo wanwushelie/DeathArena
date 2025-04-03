@@ -4,13 +4,10 @@ using System.Collections.Generic;
 
 public class ClickableShop : MonoBehaviour
 {
-    public Button buyButton; // 购买按钮
-    public Text priceText; // 价格文本
     public GameObject shopPanel; // 商店面板
     public Button openShopButton; // 打开商店的按钮
     public Transform itemsParent; // 商品列表的父对象
     public GameObject shopItemPrefab; // 商品项的预制体
-    public Image knowledgeImage; // 知识图像
     public Transform categoryButtonsParent; // 分类按钮的父对象
     public GameObject categoryButtonPrefab; // 分类按钮的预制体
     public ItemManager itemManager; // 新增：物品管理器引用
@@ -18,6 +15,17 @@ public class ClickableShop : MonoBehaviour
     private Item selectedItem; // 当前选中的物品
     private bool isShopPanelOpen = false; // 用于记录面板是否打开，默认为关闭
     private string currentCategory = "全部"; //  当前选中的分类，默认为“全部”
+
+    //左侧面板
+    [Header("左侧面板")]
+    //TMP文本
+    public TMPro.TMP_Text name; // 名称
+    public TMPro.TMP_Text categary; // 分类
+    public TMPro.TMP_Text introduce; // 介绍
+    public TMPro.TMP_Text story; // 典故
+    public Image knowledgeImage; // 知识图像
+    public Button buyButton; // 购买按钮
+    public Text priceText; // 价格文本
 
     void Start()
     {
@@ -85,7 +93,12 @@ public class ClickableShop : MonoBehaviour
         priceText.text = item.itemData.price.ToString();
 
         // 显示知识面板
-        knowledgeImage.sprite = item.shopItemData.knowledgeIntroductionImage;
+        // knowledgeImage.sprite = item.shopItemData.knowledgeIntroductionImage;
+        knowledgeImage.sprite = item.itemData.icon;
+        name.text = item.itemData.itemName;
+        categary.text = item.shopItemData.category;
+        introduce.text = item.shopItemData.itemIntroduce;
+        story.text = item.shopItemData.itemStory;
     }
 
     // 初始化商店界面

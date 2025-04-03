@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 825711048963233915}
   - component: {fileID: 3597258280071346832}
   - component: {fileID: 1995197744598113418}
-  - component: {fileID: 5073674384382412063}
   - component: {fileID: 169990952582413075}
-  - component: {fileID: 7723390314381572821}
+  - component: {fileID: 3759435026015458379}
   m_Layer: 0
   m_Name: "\u66F2\u8F95\u7281"
   m_TagString: Untagged
@@ -115,26 +114,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5073674384382412063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 853224744012164803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee6bb4c47463d8247b046887abbcecff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: 9bf77bb4a4519a24bab1c70d286c3ffc, type: 2}
-  plantData: {fileID: 0}
-  shopItemData: {fileID: 11400000, guid: c4a3a06a97ea4c743891e8588f9e4160, type: 2}
-  foodData: {fileID: 0}
-  canInteract: 0
-  isDropped: 0
-  droppedCount: 0
-  rigid: {fileID: 0}
 --- !u!61 &169990952582413075
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -180,7 +159,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 16.077547, y: 10.295801}
   m_EdgeRadius: 0
---- !u!114 &7723390314381572821
+--- !u!114 &3759435026015458379
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -189,7 +168,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 853224744012164803}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 883675ec1d208e84f990356347d42b1e, type: 3}
+  m_Script: {fileID: 11500000, guid: 52cb46d6f0a5e3d4295c5346b20f24c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canCollect: 0
+  itemData: {fileID: 11400000, guid: 9bf77bb4a4519a24bab1c70d286c3ffc, type: 2}
+  plantData: {fileID: 0}
+  shopItemData: {fileID: 11400000, guid: c4a3a06a97ea4c743891e8588f9e4160, type: 2}
+  foodData: {fileID: 0}
+  canInteract: 1
+  isDropped: 0
+  droppedCount: 0
+  rigid: {fileID: 0}

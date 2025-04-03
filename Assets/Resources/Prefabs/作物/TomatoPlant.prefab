@@ -12,8 +12,7 @@ GameObject:
   - component: {fileID: 2425632279174655595}
   - component: {fileID: 5090996269337272241}
   - component: {fileID: 6338499145855286656}
-  - component: {fileID: 2149797926061443982}
-  - component: {fileID: 4048553624533294762}
+  - component: {fileID: 8702980785807213189}
   m_Layer: 0
   m_Name: TomatoPlant
   m_TagString: Untagged
@@ -160,7 +159,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7774498, y: 0.87882555}
   m_EdgeRadius: 0
---- !u!114 &2149797926061443982
+--- !u!114 &8702980785807213189
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,22 +168,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 8214957875459074021}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee6bb4c47463d8247b046887abbcecff, type: 3}
+  m_Script: {fileID: 11500000, guid: 52cb46d6f0a5e3d4295c5346b20f24c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 56cfccb8e2f2fce45b1ae554bda45159, type: 2}
   plantData: {fileID: 11400000, guid: d5259e07fc180ac4f969b10d9be67d54, type: 2}
-  canInteract: 0
+  shopItemData: {fileID: 0}
+  foodData: {fileID: 0}
+  canInteract: 1
+  isDropped: 0
+  droppedCount: 0
   rigid: {fileID: 0}
---- !u!114 &4048553624533294762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8214957875459074021}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 883675ec1d208e84f990356347d42b1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
