@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1151199080249409313}
   - component: {fileID: 6539021794592075171}
   - component: {fileID: 972785366224686340}
-  - component: {fileID: 6104607392919456916}
+  - component: {fileID: 6850228571588055101}
   m_Layer: 0
   m_Name: "\u6805\u680F"
   m_TagString: Untagged
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_Size: {x: 1.9183333, y: 1.71}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &6539021794592075171
@@ -159,7 +159,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &6104607392919456916
+--- !u!114 &6850228571588055101
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8479927338910738496}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee6bb4c47463d8247b046887abbcecff, type: 3}
+  m_Script: {fileID: 11500000, guid: 52cb46d6f0a5e3d4295c5346b20f24c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: ac64e6d93c8309a489a4639b4911c444, type: 2}

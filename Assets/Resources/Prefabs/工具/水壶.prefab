@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7742510923935125579}
   - component: {fileID: 6220246533722886335}
   - component: {fileID: 6738484070314383932}
-  - component: {fileID: 1670599547591720605}
   - component: {fileID: 3953245719377332884}
+  - component: {fileID: 5329262361263873438}
   m_Layer: 0
   m_Name: "\u6C34\u58F6"
   m_TagString: Untagged
@@ -114,26 +114,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1670599547591720605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1811765117763612263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee6bb4c47463d8247b046887abbcecff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: 2c807916a4261264db59cf4ecded70f2, type: 2}
-  plantData: {fileID: 0}
-  shopItemData: {fileID: 0}
-  foodData: {fileID: 0}
-  canInteract: 1
-  isDropped: 0
-  droppedCount: 0
-  rigid: {fileID: 0}
 --- !u!61 &3953245719377332884
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -179,3 +159,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 25, y: 25}
   m_EdgeRadius: 0
+--- !u!114 &5329262361263873438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811765117763612263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52cb46d6f0a5e3d4295c5346b20f24c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: 2c807916a4261264db59cf4ecded70f2, type: 2}
+  plantData: {fileID: 0}
+  shopItemData: {fileID: 0}
+  foodData: {fileID: 0}
+  canInteract: 1
+  isDropped: 0
+  droppedCount: 0
+  rigid: {fileID: 0}
