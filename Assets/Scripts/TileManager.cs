@@ -46,6 +46,11 @@ public class TileManager : MonoBehaviour
         }
     }
 
+    public Vector3Int WorldToCell(Vector3 worldPosition)
+    {
+        return seedMap.WorldToCell(worldPosition);
+    }
+
     /// <summary>
     /// 将指定位置的瓦片设置为已交互状态。
     /// </summary>

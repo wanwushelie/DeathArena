@@ -15005,8 +15005,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cropManager: {fileID: 587211929}
+  tileManager: {fileID: 587211922}
   playerTag: Player
   runAwayTime: 3
+  harvestDelay: 5
 --- !u!95 &1460568259
 Animator:
   serializedVersion: 5
