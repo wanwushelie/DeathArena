@@ -41,7 +41,7 @@ public class TileManager : MonoBehaviour
             {
                 // 将可交互地图和种子地图中该位置的瓦片设置为隐藏的可交互瓦片
                 interactableMap.SetTile(position, hiddenInteractableTile);
-                seedMap.SetTile(position, hiddenInteractableTile);
+                // seedMap.SetTile(position, hiddenInteractableTile);
             }
         }
     }
