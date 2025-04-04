@@ -110,7 +110,6 @@ GameObject:
   - component: {fileID: 7166597626828136829}
   - component: {fileID: 2127624473019068566}
   - component: {fileID: 4935785201834200006}
-  - component: {fileID: 5864131022845358242}
   - component: {fileID: 4195150299285007682}
   m_Layer: 0
   m_Name: Player
@@ -176,7 +175,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 1187739997, guid: c6dbd60f8c6ca5f4cad9689ad13be58a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 14223d4ef4e1ad5438f64a2fe8c713cb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -250,7 +249,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3, y: 3}
+    oldSize: {x: 6.4, y: 7.68}
     newSize: {x: 3, y: 3}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -280,22 +279,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5864131022845358242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8400603400522103004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4a1fa91a628e124eb97ea48bc1e0cf1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 0}
-  inventoryManager: {fileID: 0}
-  houseRoofTileMap: {fileID: 0}
-  money: 0
 --- !u!114 &4195150299285007682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,6 +302,8 @@ MonoBehaviour:
       isSellable: 0
       item: {fileID: 0}
       plantData: {fileID: 0}
+      foodData: {fileID: 0}
+      shopItemData: {fileID: 0}
   backpackSlotCount: 27
   toolbar:
     slots: []
@@ -331,6 +316,8 @@ MonoBehaviour:
       isSellable: 0
       item: {fileID: 0}
       plantData: {fileID: 0}
+      foodData: {fileID: 0}
+      shopItemData: {fileID: 0}
   toolbarSlotCount: 9
   startItems:
   - {fileID: 8663601979791512083, guid: 64df3052675e5fe428837d848a5b2fe5, type: 3}

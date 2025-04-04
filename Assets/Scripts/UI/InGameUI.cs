@@ -110,19 +110,22 @@ public class InGameUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (!isInventoryMoving && !shop.isOpenShopPanel && !itemSellingBox.isOpenItemSellingBox)
-            {
-                // SoundManager.Instance.Play("EFFECT/Click", SoundType.EFFECT);
-                SoundManager.Instance.Play("控制游戏内UI的点击音效");
-                ToggleInventoryUI();
-            }
+            SoundManager.Instance.Play("控制游戏内UI的点击音效");
+            ToggleInventoryUI();
+            // if (!isInventoryMoving && !shop.isOpenShopPanel && !itemSellingBox.sellingPanel.activeSelf)
+            // // if (!isInventoryMoving && !shop.isOpenShopPanel)
+            // {
+            //     // SoundManager.Instance.Play("EFFECT/Click", SoundType.EFFECT);
+            //     SoundManager.Instance.Play("控制游戏内UI的点击音效");
+            //     ToggleInventoryUI();
+            // }
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (settingPanel.activeSelf)
-                settingPanel.SetActive(false);
-        }
+        // if (Input.GetKeyDown(KeyCode.Escape))
+        // {
+        //     if (settingPanel.activeSelf)
+        //         settingPanel.SetActive(false);
+        // }
 
         // 更新精力值滑动条
         if (Player.Instance != null)

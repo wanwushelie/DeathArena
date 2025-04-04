@@ -51,11 +51,19 @@ public class ClickToDrawRuleTile : MonoBehaviour
     // }
 
     // 更新水渠连通性
+    // 在UpdateWaterFlow方法中添加
     public void UpdateWaterFlow()
     {
         HashSet<Vector3Int> wateredPositions = GetConnectedWaterTiles();
         UpdateTilemap(wateredPositions);
+        
+        // 新增：自动浇水周围土地
+        foreach (var canalPos in wateredPositions)
+        {
+            GameManager.instance.tileManager.AutoWaterAroundCanal(canalPos);
+        }
     }
+
 
     // 获取所有带水瓦片位置
     private HashSet<Vector3Int> GetConnectedWaterTiles()

@@ -24,7 +24,7 @@ public class Slot_UI : MonoBehaviour
         if (slot != null) // 检查物品槽是否为空
         {
             // 检查物品箱是否打开且物品不可售卖
-            if (GameManager.instance.itemBox != null && GameManager.instance.itemBox.isBoxOpen && !slot.isSellable)
+            if (GameManager.instance.itemBox != null && GameManager.instance.itemBox.sellingPanel.activeSelf && !slot.isSellable)
             {
                 itemIcon.sprite = slot.icon; // 设置物品图标
                 itemIcon.color = new Color(0.4f, 0.4f, 0.4f, 0.7f); // 设置图标颜色为半透明灰色

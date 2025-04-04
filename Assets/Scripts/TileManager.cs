@@ -214,7 +214,7 @@ public class TileManager : MonoBehaviour
             // 将图块的基本属性标志设置为None
             interactableMap.SetTileFlags(position, TileFlags.None);
             // 将该位置的瓦片颜色设置为指定颜色
-            interactableMap.SetColor(position, new Color(222f / 255f, 222f / 255f, 222f / 255f));
+            interactableMap.SetColor(position, new Color(150f / 255f, 150f / 255f, 150f / 255f));
         }
     }
 
@@ -228,4 +228,33 @@ public class TileManager : MonoBehaviour
         return new List<Vector3Int>(wateredTiles.Keys);
     }
 
+    /// <summary>
+    /// 检查并自动浇水周围5x5范围内的土地瓦片
+    /// </summary>
+    /// <param name="canalPosition">水渠的中心位置</param>
+    [Header("水渠浇水设置")]
+    [Tooltip("水渠浇水范围(单侧距离)")]
+    public int canalWaterRange = 2; // 默认2格，即5x5范围
+    
+    public void AutoWaterAroundCanal(Vector3Int canalPosition)
+    {
+        for (int x = -canalWaterRange; x <= canalWaterRange; x++)
+        {
+            for (int y = -canalWaterRange; y <= canalWaterRange; y++)
+            {
+                Vector3Int tilePosition = new Vector3Int(
+                    canalPosition.x + x,
+                    canalPosition.y + y,
+                    canalPosition.z
+                );
+                
+                // 检查是否是有效土地瓦片且名称为"土地"
+                if (DoesTileExist(tilePosition) &&
+                    GetTileName(tilePosition) == "土地")
+                {
+                    WaterTile(tilePosition);
+                }
+            }
+        }
+    }
 }

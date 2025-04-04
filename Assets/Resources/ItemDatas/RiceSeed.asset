@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RiceSeed
   m_EditorClassIdentifier: 
   itemName: RiceSeed
-  icon: {fileID: 1238799929, guid: c5ad5767aaefecb49bdc5978439fd6e1, type: 3}
+  icon: {fileID: 311921964, guid: f67e79bca27dda24da7a6dcb86cc1070, type: 3}
   price: 50
   maxAllowed: 99
   isSellable: 1

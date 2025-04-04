@@ -19,6 +19,16 @@ public class TileInteraction : MonoBehaviour
     public RuleTile wateredTile; // 水渠RuleTile
     public TileBase dryTile; // 干涸的水渠瓦片
 
+    // 曲辕犁子物体引用
+    public GameObject leftPlow;
+    public GameObject rightPlow;
+    // 高级工具子物体引用
+    public GameObject leftSickle;
+    public GameObject rightSickle;
+    public GameObject leftSeeder;
+    public GameObject rightSeeder;
+    public PlantData plantData; // 植物数据
+
     /// <summary>
     /// 初始化TileInteraction类的实例。
     /// </summary>
@@ -49,6 +59,43 @@ public class TileInteraction : MonoBehaviour
         if (player.inventoryManager.toolbar.selectedSlot.itemName == null) // 检查选中物品槽中的物品名称是否为空
             return; // 如果为空，直接返回
 
+        // 检查是否持有高级工具
+        if (player.inventoryManager.toolbar.selectedSlot.itemName == "曲辕犁")
+        {
+            // 在玩家移动时自动执行耕地操作
+            AutoHoe();
+            // 显示曲辕犁子物体
+            ShowPlow();
+        }
+        else if (player.inventoryManager.toolbar.selectedSlot.itemName == "杉镰")
+        {
+            // 在玩家移动时自动执行收割操作
+            AutoHarvest();
+            // 显示杉镰子物体
+            ShowSickle();
+        }
+        else if (player.inventoryManager.toolbar.selectedSlot.itemName == "耧车")
+        {
+            // 在玩家移动时自动执行播种操作
+            AutoPlant();
+            // 显示耧车子物体
+            ShowSeeder();
+        }
+        else
+        {
+            // 处理其他工具的交互逻辑
+            HandleTileInteraction(); // 处理瓦片交互逻辑
+            // 隐藏所有高级工具子物体
+            HideAllTools();
+        }
+           
+    }
+
+    /// <summary>
+    /// 处理瓦片交互逻辑。
+    /// </summary>
+    private void HandleTileInteraction()
+    {
         CheckValidTiles(); // 检查当前鼠标位置是否为有效瓦片
 
         if (isValidTile) // 如果是有效瓦片
@@ -89,8 +136,8 @@ public class TileInteraction : MonoBehaviour
                 {
                     if (canalTilemap.GetTile(targetPosition) == wateredTile)
                     {
-                        canalTilemap.SetTile(targetPosition, dryTile);
-                        player.anim.SetTrigger("isPicking"); // 使用浇水动画
+                        canalTilemap.SetTile(targetPosition, null);//设为空
+                        player.anim.SetTrigger("isPicking"); 
                         SoundManager.Instance.Play("EFFECT/Watering", SoundType.EFFECT);
                         waterFlowManager.UpdateWaterFlow(); // 新增水流更新
                     }
@@ -109,6 +156,58 @@ public class TileInteraction : MonoBehaviour
                     RemoveFence(tileName); // 处理移除栅栏操作
                 }
             }
+        }
+ 
+    }
+
+    /// <summary>
+    /// 自动耕地操作。
+    /// </summary>
+    private void AutoHoe()
+    {
+        Vector3 playerPosition = player.transform.position; // 获取玩家的位置
+        Vector3Int gridPlayerPosition = new Vector3Int(Mathf.FloorToInt(playerPosition.x), Mathf.FloorToInt(playerPosition.y), 0); // 将玩家位置转换为整数坐标
+
+        // 检查玩家当前位置是否为可交互瓦片
+        string tileName = tileManager.GetTileName(gridPlayerPosition);
+        if (tileName == "InteractableTile")
+        {
+            tileManager.SetInteracted(gridPlayerPosition); // 设置目标瓦片为已交互状态
+        }
+    }
+
+    /// <summary>
+    /// 自动收割操作。
+    /// </summary>
+    private void AutoHarvest()
+    {
+        Vector3 playerPosition = player.transform.position; // 获取玩家的位置
+        Vector3Int gridPlayerPosition = new Vector3Int(Mathf.FloorToInt(playerPosition.x), Mathf.FloorToInt(playerPosition.y), 0); // 将玩家位置转换为整数坐标
+
+        // 检查玩家当前位置是否为已生长状态的瓦片
+        string tileState = tileManager.GetTileState(gridPlayerPosition);
+        if (tileState == "Grown")
+        {
+            tileManager.RemoveTile(gridPlayerPosition); // 移除目标瓦片
+            player.anim.SetTrigger("isHavesting"); // 触发玩家的收获动画
+            SoundManager.Instance.Play("EFFECT/Plow", SoundType.EFFECT); // 播放收获音效
+            GameManager.instance.plantGrowthManager.HarvestPlant(gridPlayerPosition); // 收获目标位置的植物
+        }
+    }
+
+    /// <summary>
+    /// 自动播种操作。
+    /// </summary>
+    private void AutoPlant()
+    {
+        Vector3 playerPosition = player.transform.position; // 获取玩家的位置
+        Vector3Int gridPlayerPosition = new Vector3Int(Mathf.FloorToInt(playerPosition.x), Mathf.FloorToInt(playerPosition.y), 0); // 将玩家位置转换为整数坐标
+
+        // 检查玩家当前位置是否为已耕地瓦片
+        string tileName = tileManager.GetTileName(gridPlayerPosition);
+        if (tileName == "土地")
+        {
+            GameManager.instance.plantGrowthManager.PlantSeed(gridPlayerPosition, plantData); // 在目标位置种植种子
         }
     }
 
@@ -270,7 +369,7 @@ public class TileInteraction : MonoBehaviour
     /// <returns></returns>
     private IEnumerator ResetHoeingState()
     {
-        yield return new WaitForSeconds(0.5f); // 从0.2秒增加到0.5秒
+        yield return new WaitForSeconds(0.2f); // 从0.2秒增加到0.5秒
          stateManager.IsHoeing = false; // 重置耕地状态为false
     }
 
@@ -282,5 +381,93 @@ public class TileInteraction : MonoBehaviour
     {
         yield return new WaitForSeconds(0.2f); // 等待0.2秒
         stateManager.IsWatering = false; // 重置浇水状态为false
+    }
+
+    /// <summary>
+    /// 显示曲辕犁子物体。
+    /// </summary>
+    private void ShowPlow()
+    {
+        if (stateManager.LastMoveDirection.x < 0) // 向左移动
+        {
+            leftPlow.SetActive(true);
+            rightPlow.SetActive(false);
+        }
+        else // 向右或向上/下移动
+        {
+            leftPlow.SetActive(false);
+            rightPlow.SetActive(true);
+        }
+    }
+
+    /// <summary>
+    /// 隐藏曲辕犁子物体。
+    /// </summary>
+    private void HidePlow()
+    {
+        leftPlow.SetActive(false);
+        rightPlow.SetActive(false);
+    }
+
+    /// <summary>
+    /// 显示杉镰子物体。
+    /// </summary>
+    private void ShowSickle()
+    {
+        if (stateManager.LastMoveDirection.x < 0) // 向左移动
+        {
+            leftSickle.SetActive(true);
+            rightSickle.SetActive(false);
+        }
+        else // 向右或向上/下移动
+        {
+            leftSickle.SetActive(false);
+            rightSickle.SetActive(true);
+        }
+    }
+
+    /// <summary>
+    /// 隐藏杉镰子物体。
+    /// </summary>
+    private void HideSickle()
+    {
+        leftSickle.SetActive(false);
+        rightSickle.SetActive(false);
+    }
+
+    /// <summary>
+    /// 显示耧车子物体。
+    /// </summary>
+    private void ShowSeeder()
+    {
+        if (stateManager.LastMoveDirection.x < 0) // 向左移动
+        {
+            leftSeeder.SetActive(true);
+            rightSeeder.SetActive(false);
+        }
+        else // 向右或向上/下移动
+        {
+            leftSeeder.SetActive(false);
+            rightSeeder.SetActive(true);
+        }
+    }
+
+    /// <summary>
+    /// 隐藏耧车子物体。
+    /// </summary>
+    private void HideSeeder()
+    {
+        leftSeeder.SetActive(false);
+        rightSeeder.SetActive(false);
+    }
+
+    /// <summary>
+    /// 隐藏所有高级工具子物体。
+    /// </summary>
+    private void HideAllTools()
+    {
+        HidePlow();
+        HideSickle();
+        HideSeeder();
     }
 }
